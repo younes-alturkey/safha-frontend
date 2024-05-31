@@ -1,0 +1,245 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignUp Page renders SignUp page unchanged 1`] = `
+<div>
+  <div
+    class="layout-wrapper MuiBox-root css-33gw4"
+  >
+    <div
+      class="app-content MuiBox-root css-10qwnza"
+    >
+      <div
+        class="content-center MuiBox-root css-imtqqp"
+      >
+        <div
+          class="MuiBox-root css-1i2bp0u"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation7 MuiCard-root css-tt7mc4-MuiPaper-root-MuiCard-root"
+          >
+            <div
+              class="MuiCardContent-root css-10pa0r4-MuiCardContent-root"
+            >
+              <div
+                class="MuiBox-root css-fdeg8e"
+              >
+                <img
+                  alt="Safha Logo"
+                  data-nimg="1"
+                  data-testid="safha-logo"
+                  decoding="async"
+                  height="75"
+                  id="safha-logo"
+                  loading="lazy"
+                  src="/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fsafha-public-01%2Fsafha-logo-transparent-black.png&w=384&q=75"
+                  srcset="/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fsafha-public-01%2Fsafha-logo-transparent-black.png&w=256&q=75 1x, /_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fsafha-public-01%2Fsafha-logo-transparent-black.png&w=384&q=75 2x"
+                  style="color: transparent; opacity: 0.5;"
+                  width="150"
+                />
+              </div>
+              <form
+                action="#"
+                autocomplete="off"
+                class="w-full"
+                novalidate=""
+              >
+                <div
+                  class="MuiBox-root css-10vvd19"
+                >
+                  <div
+                    class="MuiBox-root css-79elbk"
+                  >
+                    <div
+                      class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-11ns3xm-MuiFormControl-root-MuiTextField-root"
+                      data-testid="firstname"
+                    >
+                      <label
+                        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-filled MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-filled css-7peqn8-MuiFormLabel-root-MuiInputLabel-root"
+                        data-shrink="true"
+                        for="firstname"
+                        id="firstname-label"
+                      >
+                        الاسم الأول
+                      </label>
+                      <div
+                        class="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-ah3eer-MuiInputBase-root-MuiFilledInput-root"
+                      >
+                        <input
+                          aria-invalid="false"
+                          class="MuiInputBase-input MuiFilledInput-input MuiInputBase-inputSizeSmall css-8wyvbo-MuiInputBase-input-MuiFilledInput-input"
+                          id="firstname"
+                          placeholder="اسمك الأول"
+                          type="text"
+                          value=""
+                        />
+                      </div>
+                    </div>
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1msog3x-MuiTypography-root"
+                    />
+                  </div>
+                  <div
+                    class="MuiBox-root css-79elbk"
+                  >
+                    <div
+                      class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-11ns3xm-MuiFormControl-root-MuiTextField-root"
+                      data-testid="lastname"
+                    >
+                      <label
+                        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-filled MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-filled css-7peqn8-MuiFormLabel-root-MuiInputLabel-root"
+                        data-shrink="true"
+                        for="lastname"
+                        id="lastname-label"
+                      >
+                        الاسم الأخير
+                      </label>
+                      <div
+                        class="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-ah3eer-MuiInputBase-root-MuiFilledInput-root"
+                      >
+                        <input
+                          aria-invalid="false"
+                          class="MuiInputBase-input MuiFilledInput-input MuiInputBase-inputSizeSmall css-8wyvbo-MuiInputBase-input-MuiFilledInput-input"
+                          id="lastname"
+                          placeholder="اسمك الأخير"
+                          type="text"
+                          value=""
+                        />
+                      </div>
+                    </div>
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1msog3x-MuiTypography-root"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="MuiBox-root css-79elbk"
+                >
+                  <div
+                    class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-11ns3xm-MuiFormControl-root-MuiTextField-root"
+                    data-testid="email"
+                  >
+                    <label
+                      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-filled MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-filled css-7peqn8-MuiFormLabel-root-MuiInputLabel-root"
+                      data-shrink="true"
+                      for="email"
+                      id="email-label"
+                    >
+                      البريد الإلكتروني
+                    </label>
+                    <div
+                      class="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-ah3eer-MuiInputBase-root-MuiFilledInput-root"
+                    >
+                      <input
+                        aria-invalid="false"
+                        class="MuiInputBase-input MuiFilledInput-input MuiInputBase-inputSizeSmall css-8wyvbo-MuiInputBase-input-MuiFilledInput-input"
+                        id="email"
+                        placeholder="younes@safha.com"
+                        type="text"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-1msog3x-MuiTypography-root"
+                  />
+                </div>
+                <div
+                  class="MuiBox-root css-79elbk"
+                >
+                  <div
+                    class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-1hsdtsd-MuiFormControl-root-MuiTextField-root"
+                    data-testid="password"
+                  >
+                    <label
+                      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-filled MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-filled css-7peqn8-MuiFormLabel-root-MuiInputLabel-root"
+                      data-shrink="true"
+                      for="password"
+                      id="password-label"
+                    >
+                      كلمة المرور
+                    </label>
+                    <div
+                      class="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall MuiInputBase-adornedEnd css-xw93yy-MuiInputBase-root-MuiFilledInput-root"
+                    >
+                      <input
+                        aria-invalid="false"
+                        class="MuiInputBase-input MuiFilledInput-input MuiInputBase-inputSizeSmall MuiInputBase-inputAdornedEnd css-13scjpl-MuiInputBase-input-MuiFilledInput-input"
+                        id="password"
+                        placeholder="············"
+                        type="password"
+                        value=""
+                      />
+                      <div
+                        class="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-filled MuiInputAdornment-sizeSmall css-tsj3tr-MuiInputAdornment-root"
+                      >
+                        <button
+                          aria-label="toggle password visibility"
+                          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-xubj68-MuiButtonBase-root-MuiIconButton-root"
+                          data-testid="toggle-password"
+                          id="toggle-password"
+                          tabindex="0"
+                          type="button"
+                        >
+                          <span />
+                          <span
+                            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-1msog3x-MuiTypography-root"
+                  />
+                </div>
+                <button
+                  class="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth Mui-disabled MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth css-i5lb15-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
+                  data-testid="signup-button"
+                  disabled=""
+                  id="signup-button"
+                  tabindex="-1"
+                  type="submit"
+                >
+                  إنشاء حساب
+                </button>
+                <div
+                  class="MuiBox-root css-z0xj7h"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-body1 css-1my6stc-MuiTypography-root"
+                    href="/signin"
+                  >
+                    تسجيل الدخول
+                  </a>
+                </div>
+              </form>
+            </div>
+            <button
+              aria-label="switch app locale"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-hub4ho-MuiButtonBase-root-MuiIconButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <span />
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              aria-label="switch app locale"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-hmdvb8-MuiButtonBase-root-MuiIconButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <span />
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
