@@ -5,7 +5,6 @@ import CardContent from '@mui/material/CardContent'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles'
-import * as Sentry from '@sentry/nextjs'
 import { Form, Formik, FormikHelpers } from 'formik'
 import { getServerSession } from 'next-auth'
 import { useSession } from 'next-auth/react'
@@ -21,11 +20,9 @@ import Icon from 'src/@core/components/icon'
 import CustomTextField from 'src/@core/components/mui/text-field'
 import { useSettings } from 'src/@core/hooks/useSettings'
 import BlankLayout from 'src/@core/layouts/BlankLayout'
-import { getUniqueId, handleCreateEvent, modeToggle, switchLocale } from 'src/@core/utils'
-import { forgot } from 'src/api/auth'
+import { getUniqueId, modeToggle, switchLocale } from 'src/@core/utils'
 import { authOptions } from 'src/pages/api/auth/[...nextauth]'
-import { bucketUrl } from 'src/types/constants'
-import { Events, HTTP } from 'src/types/enums'
+import { HTTP } from 'src/types/enums'
 import AuthIllustrationV1Wrapper from 'src/views/pages/auth/AuthIllustrationV1Wrapper'
 import * as yup from 'yup'
 
@@ -54,10 +51,7 @@ const RestPasswordPage = (props: Props) => {
   const { settings, saveSettings } = useSettings()
   const [submitting, setSubmitting] = useState(false)
   const isDark = settings.mode === 'dark'
-  const apiUrl = props.apiUrl
-  const logo = isDark
-    ? `${bucketUrl}/safha-logo-transparent-white.png`
-    : `${bucketUrl}/safha-logo-transparent-black.png`
+  const logo = isDark ? `/logo-white.png` : `/logo-black.png`
 
   const FormSchema = yup.object().shape({
     email: yup
@@ -76,7 +70,6 @@ const RestPasswordPage = (props: Props) => {
     let email = getUniqueId()
     const user = session?.user
     if (user && user.email) email = user.email
-    await handleCreateEvent(Events.SWITCHED_LOCALE, email, [`user_email: ${email}`, `current_locale: ${currentLocale}`])
   }
 
   const handleModeToggle = async () => {
@@ -85,30 +78,19 @@ const RestPasswordPage = (props: Props) => {
     let email = getUniqueId()
     const user = session?.user
     if (user && user.email) email = user.email
-    await handleCreateEvent(Events.SWITCHED_MODE, email, [`user_email: ${email}`, `current_mode: ${mode}`])
   }
 
   const onSubmit = async (values: FormData, formik: FormikHelpers<FormData>) => {
     setSubmitting(true)
     try {
-      const forgotRes = await forgot(apiUrl, values.email)
-
-      if (forgotRes.status === HTTP.OK) {
-        await handleCreateEvent(Events.FORGOT_PASSWORD, values.email, [`user_email: ${values.email}`])
-        await router.push('/signin')
-        toast.success(t('instructions_sent_to_email'))
-        formik.resetForm()
-      } else if (forgotRes.status === HTTP.NOT_FOUND) {
-        toast.error(t('email_not_found'))
-      } else {
-        toast.error(t('something_went_wrong'))
-      }
+      await router.push('/signin')
+      toast.success(t('instructions_sent_to_email'))
+      formik.resetForm()
       setSubmitting(false)
     } catch (error: any) {
       let errorMsg = t('something_went_wrong')
       const errRes = error.response
       if (errRes.status === HTTP.NOT_FOUND) errorMsg = t('email_not_found')
-      Sentry.captureException(error)
       toast.error(errorMsg)
       setSubmitting(false)
     }

@@ -14,10 +14,8 @@ import { useTranslation } from 'react-i18next'
 import Icon from 'src/@core/components/icon'
 import { useSettings } from 'src/@core/hooks/useSettings'
 import BlankLayout from 'src/@core/layouts/BlankLayout'
-import { getUniqueId, handleCreateEvent, modeToggle, switchLocale } from 'src/@core/utils'
+import { getUniqueId, modeToggle, switchLocale } from 'src/@core/utils'
 import { authOptions } from 'src/pages/api/auth/[...nextauth]'
-import { bucketUrl } from 'src/types/constants'
-import { Events } from 'src/types/enums'
 import FooterIllustrations from 'src/views/pages/misc/FooterIllustrations'
 
 // ** Styled Components
@@ -50,13 +48,10 @@ const SignOutPage = (props: Props) => {
   const user = session?.user
   const { settings, saveSettings } = useSettings()
   const isDark = settings.mode === 'dark'
-  const logo = isDark
-    ? `${bucketUrl}/safha-logo-transparent-white.png`
-    : `${bucketUrl}/safha-logo-transparent-black.png`
-  const illustration = `${bucketUrl}/coming-soon-illustration.png`
+  const logo = isDark ? `/logo-white.png` : `/logo-black.png`
+  const illustration = `/sofa.png`
 
   const handleSignOut = async () => {
-    await handleCreateEvent(Events.SIGNED_OUT, user.email, [`user_email: ${user.email}`])
     await signOut()
   }
 
@@ -66,7 +61,6 @@ const SignOutPage = (props: Props) => {
     let email = getUniqueId()
     const user = session?.user
     if (user && user.email) email = user.email
-    await handleCreateEvent(Events.SWITCHED_LOCALE, email, [`user_email: ${email}`, `current_locale: ${currentLocale}`])
   }
 
   const handleModeToggle = async () => {
@@ -75,7 +69,6 @@ const SignOutPage = (props: Props) => {
     let email = getUniqueId()
     const user = session?.user
     if (user && user.email) email = user.email
-    await handleCreateEvent(Events.SWITCHED_MODE, email, [`user_email: ${email}`, `current_mode: ${mode}`])
   }
 
   useEffect(() => {

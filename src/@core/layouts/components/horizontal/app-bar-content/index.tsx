@@ -10,7 +10,6 @@ import { LayoutProps } from 'src/@core/layouts/types'
 
 // ** Theme Config Import
 import Image from 'next/image'
-import { bucketUrl } from 'src/types/constants'
 
 interface Props {
   hidden: LayoutProps['hidden']
@@ -31,9 +30,7 @@ const AppBarContent = (props: Props) => {
   const { appBarContent: userAppBarContent, appBarBranding: userAppBarBranding } = props
   const { settings } = props
   const isDark = settings.mode === 'dark'
-  const logo = isDark
-    ? `${bucketUrl}/safha-logo-transparent-white.png`
-    : `${bucketUrl}/safha-logo-transparent-black.png`
+  const logo = isDark ? `/logo-white.png` : `/logo-black.png`
 
   return (
     <Box sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>

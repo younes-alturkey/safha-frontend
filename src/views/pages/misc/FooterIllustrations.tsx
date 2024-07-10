@@ -1,7 +1,6 @@
 import { styled, useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { ReactNode } from 'react'
-import { bucketUrl } from 'src/types/constants'
 
 interface FooterIllustrationsProp {
   image?: ReactNode
@@ -20,9 +19,7 @@ const FooterIllustrations = (props: FooterIllustrationsProp) => {
   const { image } = props
   const theme = useTheme()
   const hidden = useMediaQuery(theme.breakpoints.down('md'))
-  const mask = bucketUrl
-    ? `${bucketUrl}/misc-mask-${theme.palette.mode}.png`
-    : `/images/pages/misc-mask-${theme.palette.mode}.png`
+  const mask = `/misc-mask-${theme.palette.mode}.png`
 
   if (!hidden) {
     return (

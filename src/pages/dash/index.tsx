@@ -1,20 +1,15 @@
-import { faker } from '@faker-js/faker'
 import { Grid } from '@mui/material'
 import Box, { BoxProps } from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles'
-import * as Sentry from '@sentry/nextjs'
 import { getServerSession } from 'next-auth'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next/types'
 import { useTranslation } from 'react-i18next'
 import { HorizontalNavItemsType, VerticalNavItemsType } from 'src/@core/layouts/types'
-import { getWebsites } from 'src/api/website'
 import UserLayout from 'src/layouts/UserLayout'
 import UserHorizontalNavItems from 'src/navigation/user/horizontal'
 import UserVerticalNavItems from 'src/navigation/user/vertical'
 import { authOptions } from 'src/pages/api/auth/[...nextauth]'
-import { bucketUrl } from 'src/types/constants'
-import { HTTP } from 'src/types/enums'
 
 const BoxWrapper = styled(Box)<BoxProps>(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
@@ -47,7 +42,7 @@ interface Props {
 const DashPage = (props: Props) => {
   const session = JSON.parse(props.session)
   const user = session.user
-  const illustration = `${bucketUrl}/under-work-illustration.png`
+  const illustration = `/ohh.png`
   const { t } = useTranslation()
 
   return (
@@ -71,45 +66,23 @@ const DashPage = (props: Props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-  const apiUrl = process.env.API_URL as string
   const navigation = {
     UserVerticalNavItems,
     UserHorizontalNavItems
   }
 
   let session = null
-  let websites: any[] = [
-    { name: faker.person.fullName(), url: 'https://golden.safha.com' },
-    { name: faker.person.fullName(), url: 'https://safha-prompt-poc-git-safha-web-10-safha.vercel.app' },
-    { name: faker.person.fullName(), url: 'https://safha-prompt-poc-git-safha-web-2-safha.vercel.app' },
-    { name: faker.person.fullName(), url: 'https://safha-prompt-poc-git-safha-web-4-safha.vercel.app' },
-    { name: faker.person.fullName(), url: 'https://safha-prompt-poc-git-safha-web-5-safha.vercel.app' },
-    { name: faker.person.fullName(), url: 'https://safha-prompt-poc-git-safha-web-6-safha.vercel.app' },
-    { name: faker.person.fullName(), url: 'https://safha-prompt-poc-git-safha-web-7-safha.vercel.app' },
-    { name: faker.person.fullName(), url: 'https://safha-prompt-poc-git-safha-web-8-safha.vercel.app' },
-    { name: faker.person.fullName(), url: 'https://safha-prompt-poc-git-safha-web-9-safha.vercel.app' }
-  ]
 
   try {
     const sessionData = await getServerSession(context.req, context.res, authOptions)
+    if (!sessionData) return { redirect: { destination: '/signin', permanent: false } }
     session = JSON.stringify(sessionData)
-
-    const websitesRes = await getWebsites(apiUrl)
-    if ('status' in websitesRes && websitesRes.status === HTTP.OK)
-      websites = [
-        ...websitesRes.data.map((w: any) => ({
-          name: w.resouceName,
-          url: `https://${w.resouceName}.safha.com`
-        })),
-        ...websites
-      ]
   } catch (err) {
     console.error(err)
-    Sentry.captureException(err)
   }
 
   return {
-    props: { apiUrl, navigation, session, websites }
+    props: { navigation, session }
   }
 }
 

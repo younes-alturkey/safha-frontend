@@ -1,13 +1,11 @@
 import { faker } from '@faker-js/faker'
-import * as Sentry from '@sentry/nextjs'
 import { i18n } from 'i18next'
 import moment from 'moment'
 import { NextRouter } from 'next/router'
 import { Settings } from 'src/@core/context/settingsContext'
 import { Mode } from 'src/@core/layouts/types'
-import { createEvent, getIPInfo } from 'src/api/analytics'
 import { getSiteShot } from 'src/api/website'
-import { Events, HTTP } from 'src/types/enums'
+import { HTTP } from 'src/types/enums'
 
 export function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms))
@@ -189,31 +187,6 @@ export function objToArrayString(obj: object) {
   return Object.entries(obj).map(([key, value]) => `${key}: ${value}`)
 }
 
-export async function handleCreateEvent(name: string, id: string, fields: string[]) {
-  try {
-    let geo = null
-    const ipInfoRes = await getIPInfo()
-    if (ipInfoRes.status === HTTP.OK) {
-      const info = ipInfoRes.data
-      if (info.timezone) info.$timezone = info.timezone
-      if (info.country) info.mp_country_code = info.country
-      if (info.region) info.$region = info.region.split(' ')[0]
-      if (info.city) info.$city = info.city
-      if (info.ip) info.ip_address = info.ip
-      geo = info
-    }
-
-    return await createEvent({
-      name,
-      id,
-      fields: geo ? [...objToArrayString(geo), ...fields] : fields
-    })
-  } catch (err) {
-    Sentry.captureException(err)
-    console.error(err)
-  }
-}
-
 export function generateTempId() {
   return `${faker.person.firstName()}_${faker.person.lastName()}`.toLocaleLowerCase()
 }
@@ -242,7 +215,7 @@ export async function switchLocale(settings: Settings, saveSettings: (updatedSet
   const direction = language === 'ar' ? 'rtl' : 'ltr'
   await i18n.changeLanguage(language)
   moment.locale(language)
-  reverseCrisp(language === 'ar')
+
   saveSettings({ ...settings, direction: direction, language: language })
 }
 
@@ -326,7 +299,6 @@ export async function handleUpdateSiteShot(
     let email = getUniqueId()
     const user = session?.user
     if (user && user.email) email = user.email
-    handleCreateEvent(Events.GENERATED_SITE_SHOT, email, [`user_email: ${email}`, `url: ${url}`])
 
     return siteShot
   }

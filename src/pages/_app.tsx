@@ -86,8 +86,6 @@ const App = (props: ExtendedAppProps) => {
     const language = settings?.language || 'en'
     i18n.changeLanguage(language)
     moment.locale(language)
-    utils.reverseCrisp(language === 'ar')
-    utils.safeCrisp()
   }
 
   useEffect(() => {

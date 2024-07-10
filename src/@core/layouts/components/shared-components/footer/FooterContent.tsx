@@ -23,13 +23,13 @@ const FooterContent = () => {
       <Typography sx={{ opacity: '25%' }}>{`${t('release')} — ${getAppRelease()}`}</Typography>
       {hidden ? null : (
         <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', '& :not(:last-child)': { mr: 4 } }}>
-          <Typography target='_blank' component={LinkStyled} href='https://status.safha.com'>
+          <Typography target='_blank' component={LinkStyled} href='https://github.com/younes-alturkey'>
             {t('system_status')}
           </Typography>
-          <Typography target='_blank' component={LinkStyled} href={t('terms_of_service_url')}>
+          <Typography target='_blank' component={LinkStyled} href='https://github.com/younes-alturkey'>
             {t('terms_of_service')}
           </Typography>
-          <Typography target='_blank' component={LinkStyled} href={t('privacy_policy_url')}>
+          <Typography target='_blank' component={LinkStyled} href='https://github.com/younes-alturkey'>
             {t('privacy_policy')}
           </Typography>
         </Box>

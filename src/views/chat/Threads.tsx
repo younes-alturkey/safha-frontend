@@ -9,7 +9,6 @@ import ListItemAvatar from '@mui/material/ListItemAvatar'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import Typography from '@mui/material/Typography'
-import * as Sentry from '@sentry/nextjs'
 import moment from 'moment'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -26,7 +25,6 @@ import { getInitials } from 'src/@core/utils/get-initials'
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 import { AppDispatch } from 'src/store'
 import { createNewThread, getAssistantMessages, setShowSettings, setThread } from 'src/store/apps/chat'
-import { bucketUrl } from 'src/types/constants'
 import ThreadsLeft from 'src/views/chat/ThreadsLeft'
 
 const ScrollWrapper = ({ children, hidden }: { children: ReactNode; hidden: boolean }) => {
@@ -50,9 +48,7 @@ const Threads = (props: ThreadsProps) => {
   const { t } = useTranslation()
   const { settings } = useSettings()
   const isDark = settings.mode === 'dark'
-  const logo = isDark
-    ? `${bucketUrl}/safha-logo-transparent-white.png`
-    : `${bucketUrl}/safha-logo-transparent-black.png`
+  const logo = isDark ? `/logo-white.png` : `/logo-black.png`
 
   const handleOpenSettings = () => dispatch(setShowSettings(true))
 
@@ -67,7 +63,6 @@ const Threads = (props: ThreadsProps) => {
     } catch (err) {
       console.error(err)
       toast.error(t('something_went_wrong'))
-      Sentry.captureException(err)
     }
   }
 

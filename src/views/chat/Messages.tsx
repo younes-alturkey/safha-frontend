@@ -8,11 +8,10 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import Icon from 'src/@core/components/icon'
 import { useSettings } from 'src/@core/hooks/useSettings'
-import { getUniqueId, handleCreateEvent, modeToggle, switchLocale } from 'src/@core/utils'
+import { getUniqueId, modeToggle, switchLocale } from 'src/@core/utils'
 import { AppDispatch } from 'src/store'
 import { setShowInfo } from 'src/store/apps/chat'
 import { bucketUrl } from 'src/types/constants'
-import { Events } from 'src/types/enums'
 import InfoRight from 'src/views/chat/InfoRight'
 import MessagesLog from 'src/views/chat/MessagesLog'
 import SendMessageForm from 'src/views/chat/SendMessageForm'
@@ -40,7 +39,6 @@ const Messages = (props: MessagesProps) => {
     let email = getUniqueId()
     const user = session?.user
     if (user && user.email) email = user.email
-    await handleCreateEvent(Events.SWITCHED_LOCALE, email, [`user_email: ${email}`, `current_locale: ${currentLocale}`])
   }
 
   const handleModeToggle = async () => {
@@ -49,7 +47,6 @@ const Messages = (props: MessagesProps) => {
     let email = getUniqueId()
     const user = session?.user
     if (user && user.email) email = user.email
-    await handleCreateEvent(Events.SWITCHED_MODE, email, [`user_email: ${email}`, `current_mode: ${mode}`])
   }
 
   return (

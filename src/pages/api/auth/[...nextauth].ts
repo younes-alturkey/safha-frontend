@@ -1,7 +1,7 @@
 import NextAuth, { NextAuthOptions, User } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { parseJwt } from 'src/@core/utils'
-import { RefreshData, refresh, signin } from 'src/api/auth'
+import { RefreshData, refresh } from 'src/api/auth'
 import { HTTP } from 'src/types/enums'
 
 interface Credentials {
@@ -42,47 +42,15 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials: Credentials | undefined): Promise<AuthUser | null> {
         try {
-          if (!credentials) return null
-
-          const userCredentials = {
-            email: credentials.email,
-            password: credentials.password
-          }
-          const url = process.env.API_URL
-          if (!url) throw new Error('API_URL is not defined.')
-
-          const signInRes: any = await signin(url, userCredentials)
-          if (!('status' in signInRes) || signInRes.status !== HTTP.OK) {
-            const err = signInRes
-            if ('response' in signInRes) {
-              const status = signInRes?.response?.status
-              if (status === HTTP.UNAUTHORIZED) throw new Error('Unauthorized signin request.')
-              if (status === HTTP.NOT_FOUND) throw new Error('User was not found.')
-              else throw new Error('HTTP request failed.')
-            }
-            console.error(err)
-            throw new Error('HTTP request failed.')
-          }
-
-          if (!signInRes.data || !signInRes.data.model) {
-            console.error(signInRes)
-            throw new Error(`Response does not include 'data' or 'model' which is expected.`)
-          }
-
-          const data = signInRes.data.model
-          const token = data.token
-          const refreshToken = data.refreshToken
-          const parsedToken = parseJwt(token)
-
           const user = {
-            name: parsedToken.name,
-            email: parsedToken.email,
-            id: parsedToken.id,
-            birthdate: parsedToken.birthdate,
-            role: parsedToken.role,
-            token,
-            refreshToken,
-            tokenExp: parsedToken.exp
+            name: 'Younes Alturkey',
+            email: 'younes@safha.com',
+            id: '1093654584',
+            birthdate: '26/10/1995',
+            role: 'customer',
+            token: 'token',
+            refreshToken: 'refreshtoken',
+            tokenExp: Date.now()
           }
 
           return user

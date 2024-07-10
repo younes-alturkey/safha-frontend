@@ -22,11 +22,9 @@ import Icon from 'src/@core/components/icon'
 import CustomTextField from 'src/@core/components/mui/text-field'
 import { useSettings } from 'src/@core/hooks/useSettings'
 import BlankLayout from 'src/@core/layouts/BlankLayout'
-import { getUniqueId, handleCreateEvent, modeToggle, switchLocale } from 'src/@core/utils'
-import { RestPasswordType, reset } from 'src/api/auth'
+import { getUniqueId, modeToggle, switchLocale } from 'src/@core/utils'
+import { RestPasswordType } from 'src/api/auth'
 import { authOptions } from 'src/pages/api/auth/[...nextauth]'
-import { bucketUrl } from 'src/types/constants'
-import { Events, HTTP } from 'src/types/enums'
 import AuthIllustrationV1Wrapper from 'src/views/pages/auth/AuthIllustrationV1Wrapper'
 import * as yup from 'yup'
 
@@ -51,7 +49,6 @@ const Card = styled(MuiCard)<CardProps>(({ theme }) => ({
 
 const NewPasswordPage = (props: Props) => {
   const { data: session } = useSession()
-  const apiUrl = props.apiUrl
   const router = useRouter()
   const { t, i18n } = useTranslation()
   const searchParams = useSearchParams()
@@ -64,9 +61,7 @@ const NewPasswordPage = (props: Props) => {
   const [email] = useState(emailQParam)
   const [token] = useState(tokenQParam)
   const isDark = settings.mode === 'dark'
-  const logo = isDark
-    ? `${bucketUrl}/safha-logo-transparent-white.png`
-    : `${bucketUrl}/safha-logo-transparent-black.png`
+  const logo = isDark ? `/logo-white.png` : `/logo-black.png`
 
   const FormSchema = yup.object().shape({
     password: yup
@@ -90,7 +85,6 @@ const NewPasswordPage = (props: Props) => {
     let email = getUniqueId()
     const user = session?.user
     if (user && user.email) email = user.email
-    await handleCreateEvent(Events.SWITCHED_LOCALE, email, [`user_email: ${email}`, `current_locale: ${currentLocale}`])
   }
 
   const handleModeToggle = async () => {
@@ -99,7 +93,6 @@ const NewPasswordPage = (props: Props) => {
     let email = getUniqueId()
     const user = session?.user
     if (user && user.email) email = user.email
-    await handleCreateEvent(Events.SWITCHED_MODE, email, [`user_email: ${email}`, `current_mode: ${mode}`])
   }
 
   const onSubmit = async (values: FormData, formik: FormikHelpers<FormData>) => {
@@ -110,20 +103,14 @@ const NewPasswordPage = (props: Props) => {
         email: email as string,
         token: token as string
       }
-      const resetRes = await reset(apiUrl, data)
-      if (resetRes.status === HTTP.OK) {
-        await handleCreateEvent(Events.RESET_PASSWORD, email as string, [`user_email: ${email as string}`])
-        toast.success(t('password_reset_successful'))
-        await router.push({
-          pathname: '/signin',
-          query: {
-            email: email
-          }
-        })
-        formik.resetForm()
-      } else {
-        toast.error(t('password_reset_failed'))
-      }
+      toast.success(t('password_reset_successful'))
+      await router.push({
+        pathname: '/signin',
+        query: {
+          email: email
+        }
+      })
+      formik.resetForm()
     } catch (error) {
       console.error(error)
       toast.error(t('something_went_wrong'))
@@ -249,9 +236,7 @@ const NewPasswordPage = (props: Props) => {
                         !formik.values.password ||
                         !formik.values.confirmPassword ||
                         Boolean(formik.errors.password) ||
-                        Boolean(formik.errors.confirmPassword) ||
-                        !email ||
-                        !token
+                        Boolean(formik.errors.confirmPassword)
                       }
                     >
                       {t('apply')}

@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import Icon from 'src/@core/components/icon'
 import OptionsMenu from 'src/@core/components/option-menu'
 import { Settings } from 'src/@core/context/settingsContext'
-import { reverseCrisp } from 'src/@core/utils'
 
 interface Props {
   settings: Settings
@@ -28,7 +27,6 @@ const LanguageDropdown = ({ settings, saveSettings }: Props) => {
               saveSettings({ ...settings, direction: 'ltr', language: 'en' })
               i18n.changeLanguage('en')
               moment.locale('en')
-              reverseCrisp(false)
             }
           }
         },
@@ -41,7 +39,6 @@ const LanguageDropdown = ({ settings, saveSettings }: Props) => {
               saveSettings({ ...settings, direction: 'rtl', language: 'ar' })
               i18n.changeLanguage('ar')
               moment.locale('ar')
-              reverseCrisp(true)
             }
           }
         }

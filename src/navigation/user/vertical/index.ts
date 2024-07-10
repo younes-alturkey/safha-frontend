@@ -212,28 +212,28 @@ const navigation: VerticalNavItemsType = [
   },
   {
     title: 'help_center',
-    path: 'https://help.safha.com',
+    path: 'https://github.com/younes-alturkey',
     icon: 'mdi:help-outline',
     externalLink: true,
     openInNewTab: true
   },
   {
     title: 'report_issue',
-    path: 'https://feedback.safha.com/boards/issues',
+    path: 'https://github.com/younes-alturkey',
     icon: 'ph:bug-light',
     externalLink: true,
     openInNewTab: true
   },
   {
     title: 'request_feature',
-    path: 'https://feedback.safha.com/boards/ideas',
+    path: 'https://github.com/younes-alturkey',
     icon: 'fluent:emoji-add-24-regular',
     externalLink: true,
     openInNewTab: true
   },
   {
     title: 'safha_community',
-    path: 'https://discord.gg/JEcScVtXfp',
+    path: 'https://github.com/younes-alturkey',
     icon: 'radix-icons:discord-logo',
     externalLink: true,
     openInNewTab: true

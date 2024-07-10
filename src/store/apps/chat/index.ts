@@ -24,7 +24,6 @@ export const createNewThread = createAsyncThunk('chat/createNewThread', async (_
     }
   } catch (error) {
     console.error(error)
-    Sentry.captureException(error)
 
     return rejectWithValue('An unexpected error occurred')
   }
@@ -43,7 +42,6 @@ export const getAssistantMessages = createAsyncThunk('chat/getAssistantMessages'
     }
   } catch (error) {
     console.error(error)
-    Sentry.captureException(error)
 
     return thunkAPI.rejectWithValue('An unexpected error occurred')
   }
@@ -111,7 +109,6 @@ export const messageAssistant = createAsyncThunk('chat/messageAssistant', async 
     }
   } catch (error) {
     console.error(error)
-    Sentry.captureException(error)
 
     return thunkAPI.rejectWithValue('An unexpected error occurred')
   }
@@ -151,7 +148,6 @@ export const generateWebsite = createAsyncThunk('chat/generateWebsite', async (a
     }
   } catch (error) {
     console.error(error)
-    Sentry.captureException(error)
 
     return thunkAPI.rejectWithValue('An unexpected error occurred')
   }
@@ -162,7 +158,6 @@ export const deleteWebsite = createAsyncThunk('chat/deleteWebsite', async (_, { 
     await sleep(5000)
   } catch (error) {
     console.error(error)
-    Sentry.captureException(error)
 
     return rejectWithValue('An unexpected error occurred')
   }

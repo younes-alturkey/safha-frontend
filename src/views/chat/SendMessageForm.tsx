@@ -4,7 +4,6 @@ import Box, { BoxProps } from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import { styled, useTheme } from '@mui/material/styles'
-import * as Sentry from '@sentry/nextjs'
 import { Form, Formik } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useEffect, useRef, useState } from 'react'
@@ -14,7 +13,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 import { useDispatch, useSelector } from 'react-redux'
 import Icon from 'src/@core/components/icon'
 import CustomTextField from 'src/@core/components/mui/text-field'
-import { getUniqueId, handleCreateEvent } from 'src/@core/utils'
+import { getUniqueId } from 'src/@core/utils'
 import { AppDispatch } from 'src/store'
 import {
   createNewThread,
@@ -26,7 +25,6 @@ import {
   setPrompt,
   setShowSettings
 } from 'src/store/apps/chat'
-import { Events } from 'src/types/enums'
 
 const ChatFormWrapper = styled(Box)<BoxProps>(({ theme }) => ({
   display: 'flex',
@@ -122,8 +120,6 @@ const SendMessageForm = (props: SendMessageFormProps) => {
       )
       const messageAssistantOp = await dispatch(messageAssistant(payload))
       if (messageAssistantOp.meta.requestStatus === 'fulfilled') {
-        handleCreateEvent(Events.SUBMITTED_PROMPT, email, [`user_email: ${email}`, `user_prompt: ${prompt}`])
-
         const payload = messageAssistantOp.payload as any
         const isReady = payload.isReady
         if (isReady && !generating) {
@@ -156,7 +152,6 @@ const SendMessageForm = (props: SendMessageFormProps) => {
     } catch (err) {
       console.error(err)
       toast.error(t('something_went_wrong'))
-      Sentry.captureException(err)
     }
   }
 

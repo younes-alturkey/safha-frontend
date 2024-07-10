@@ -100,7 +100,6 @@ const AIGeneratedImages = (props: AIGeneratedImagesProps) => {
         throw new Error('Failed to generate images')
       }
     } catch (error) {
-      Sentry.captureException(error)
       console.error(error)
       toast.error(t('something_went_wrong'))
     }

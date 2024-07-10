@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import * as Sentry from '@sentry/nextjs'
 import { handleGetSiteShot, sleep } from 'src/@core/utils'
 import { deleteFile, uploadFile } from 'src/api/gcp'
 import { USERS_ASSETS_BUCKET_NAME } from 'src/types/constants'
@@ -8,7 +7,7 @@ import { FileProp } from 'src/views/wizard/LogoUploader'
 export const generateWebsite = createAsyncThunk('wizard/generateWebsite', async (args: any, thunkAPI) => {
   try {
     const { wizard, session } = args
-    console.log('request', wizard)
+
     await sleep(7000)
     const generated = true
     const siteShot = await handleGetSiteShot('https://golden.safha.com', session)
@@ -16,7 +15,6 @@ export const generateWebsite = createAsyncThunk('wizard/generateWebsite', async 
     return { generated, siteShot }
   } catch (error) {
     console.error(error)
-    Sentry.captureException(error)
 
     return thunkAPI.rejectWithValue('An unexpected error occurred')
   }
@@ -36,7 +34,6 @@ export const logosGenerate = createAsyncThunk('wizard/logosGenerate', async (arg
     }
   } catch (error) {
     console.error(error)
-    Sentry.captureException(error)
 
     return thunkAPI.rejectWithValue('An unexpected error occurred')
   }
@@ -59,7 +56,6 @@ export const projectImagesGenerate = createAsyncThunk('wizard/projectImagesGener
     }
   } catch (error) {
     console.error(error)
-    Sentry.captureException(error)
 
     return thunkAPI.rejectWithValue({ index })
   }
@@ -82,7 +78,6 @@ export const productImagesGenerate = createAsyncThunk('wizard/productImagesGener
     }
   } catch (error) {
     console.error(error)
-    Sentry.captureException(error)
 
     return thunkAPI.rejectWithValue({ index })
   }
@@ -100,7 +95,6 @@ export const logoUpload = createAsyncThunk('wizard/logoUpload', async (args: any
     return { url: uploadRes.data.url }
   } catch (error) {
     console.error(error)
-    Sentry.captureException(error)
 
     return thunkAPI.rejectWithValue('An unexpected error occurred')
   }
@@ -118,7 +112,6 @@ export const photoUpload = createAsyncThunk('wizard/photoUpload', async (args: a
     return { url: uploadRes.data.url, index }
   } catch (error) {
     console.error(error)
-    Sentry.captureException(error)
 
     return thunkAPI.rejectWithValue({ index })
   }
@@ -136,7 +129,6 @@ export const projectImageUpload = createAsyncThunk('wizard/projectImageUpload', 
     return { url: uploadRes.data.url, index }
   } catch (error) {
     console.error(error)
-    Sentry.captureException(error)
 
     return thunkAPI.rejectWithValue({ index })
   }
@@ -154,7 +146,6 @@ export const galleryImageUpload = createAsyncThunk('wizard/galleryImageUpload', 
     return { url: uploadRes.data.url }
   } catch (error) {
     console.error(error)
-    Sentry.captureException(error)
 
     return thunkAPI.rejectWithValue('An unexpected error occurred')
   }
@@ -172,7 +163,6 @@ export const productImageUpload = createAsyncThunk('wizard/productImageUpload', 
     return { url: uploadRes.data.url, index }
   } catch (error) {
     console.error(error)
-    Sentry.captureException(error)
 
     return thunkAPI.rejectWithValue({ index })
   }
@@ -186,7 +176,6 @@ export const logoDelete = createAsyncThunk('wizard/logoDelete', async (args: any
     await deleteFile({ bucketName, fileName })
   } catch (error) {
     console.error(error)
-    Sentry.captureException(error)
 
     return thunkAPI.rejectWithValue('An unexpected error occurred')
   }
@@ -202,7 +191,6 @@ export const photoDelete = createAsyncThunk('wizard/photoDelete', async (args: a
     return { index }
   } catch (error) {
     console.error(error)
-    Sentry.captureException(error)
 
     return thunkAPI.rejectWithValue({ index })
   }
@@ -218,7 +206,6 @@ export const projectImageDelete = createAsyncThunk('wizard/projectImageDelete', 
     return { index }
   } catch (error) {
     console.error(error)
-    Sentry.captureException(error)
 
     return thunkAPI.rejectWithValue({ index })
   }
@@ -234,7 +221,6 @@ export const productImageDelete = createAsyncThunk('wizard/productImageDelete', 
     return { index }
   } catch (error) {
     console.error(error)
-    Sentry.captureException(error)
 
     return thunkAPI.rejectWithValue({ index })
   }
@@ -247,7 +233,6 @@ export const deleteWebsite = createAsyncThunk('wizard/deleteWebsite', async (_: 
     return { deleted: true }
   } catch (error) {
     console.error(error)
-    Sentry.captureException(error)
 
     return thunkAPI.rejectWithValue('An unexpected error occurred')
   }

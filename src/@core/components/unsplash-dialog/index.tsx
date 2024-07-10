@@ -7,7 +7,6 @@ import Grid from '@mui/material/Grid'
 import IconButton, { IconButtonProps } from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles'
-import * as Sentry from '@sentry/nextjs'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FormEvent, ReactElement, Ref, forwardRef, useState } from 'react'
@@ -90,7 +89,6 @@ export default function UnsplashDialog(props: UnsplashDialogProps) {
       }
     } catch (err) {
       console.error(err)
-      Sentry.captureException(err)
       toast.error(t('something_went_wrong'))
     }
   }
@@ -109,7 +107,6 @@ export default function UnsplashDialog(props: UnsplashDialogProps) {
       }
     } catch (err) {
       console.error(err)
-      Sentry.captureException(err)
       toast.error(t('something_went_wrong'))
     }
     setLoading(false)

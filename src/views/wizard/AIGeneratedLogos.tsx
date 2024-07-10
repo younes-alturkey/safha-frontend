@@ -5,7 +5,6 @@ import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material/styles'
-import * as Sentry from '@sentry/nextjs'
 import { useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
@@ -81,7 +80,6 @@ const AIGeneratedLogos = (props: AIGeneratedLogosProps) => {
         throw new Error('Failed to generate logos')
       }
     } catch (error) {
-      Sentry.captureException(error)
       console.error(error)
       toast.error(t('something_went_wrong'))
     }

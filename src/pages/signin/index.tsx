@@ -24,10 +24,9 @@ import Icon from 'src/@core/components/icon'
 import CustomTextField from 'src/@core/components/mui/text-field'
 import { useSettings } from 'src/@core/hooks/useSettings'
 import BlankLayout from 'src/@core/layouts/BlankLayout'
-import { getUniqueId, handleCreateEvent, modeToggle, switchLocale } from 'src/@core/utils'
+import { getUniqueId, modeToggle, switchLocale } from 'src/@core/utils'
 import { authOptions } from 'src/pages/api/auth/[...nextauth]'
-import { bucketUrl } from 'src/types/constants'
-import { Events, HTTP } from 'src/types/enums'
+import { HTTP } from 'src/types/enums'
 import AuthIllustrationV1Wrapper from 'src/views/pages/auth/AuthIllustrationV1Wrapper'
 import * as yup from 'yup'
 
@@ -62,9 +61,7 @@ const SignInPage = () => {
   const [password] = useState(passwordQParam)
   const welcome = searchParams.get('welcome')
   const isDark = settings.mode === 'dark'
-  const logo = isDark
-    ? `${bucketUrl}/safha-logo-transparent-white.png`
-    : `${bucketUrl}/safha-logo-transparent-black.png`
+  const logo = isDark ? `/logo-white.png` : `/logo-black.png`
 
   const FormSchema = yup.object().shape({
     email: yup
@@ -75,8 +72,8 @@ const SignInPage = () => {
   })
 
   const initialValues = {
-    email: email || '',
-    password: password || ''
+    email: email || 'younes@safha.com',
+    password: password || 'safha'
   }
 
   const handleSwitchLocale = async () => {
@@ -85,7 +82,6 @@ const SignInPage = () => {
     let email = getUniqueId()
     const user = session?.user
     if (user && user.email) email = user.email
-    await handleCreateEvent(Events.SWITCHED_LOCALE, email, [`user_email: ${email}`, `current_locale: ${currentLocale}`])
   }
 
   const handleModeToggle = async () => {
@@ -94,7 +90,6 @@ const SignInPage = () => {
     let email = getUniqueId()
     const user = session?.user
     if (user && user.email) email = user.email
-    await handleCreateEvent(Events.SWITCHED_MODE, email, [`user_email: ${email}`, `current_mode: ${mode}`])
   }
 
   const onSubmit = async (values: FormData, formik: FormikHelpers<FormData>) => {
@@ -109,7 +104,6 @@ const SignInPage = () => {
         callbackUrl: callbackUrl
       })
     } catch (error) {
-      Sentry.captureException(error)
       console.error(error)
       toast.error(t('something_went_wrong'))
       setSubmitting(false)
@@ -120,11 +114,6 @@ const SignInPage = () => {
     const status = signinReq?.status
     switch (status) {
       case HTTP.OK:
-        await handleCreateEvent(Events.SIGNED_IN, values.email, [
-          'signin_type: direct',
-          'signin_method: email',
-          `user_email: ${values.email}`
-        ])
         await router.push(callbackUrl)
         formik.resetForm()
         toast.success(t('welcome_back'))

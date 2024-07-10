@@ -14,7 +14,6 @@ import Icon from 'src/@core/components/icon'
 
 // ** Configs
 import Image from 'next/image'
-import { bucketUrl } from 'src/types/constants'
 
 interface Props {
   navHover: boolean
@@ -60,9 +59,7 @@ const VerticalNavHeader = (props: Props) => {
     menuUnlockedIcon: userMenuUnlockedIcon
   } = props
   const isDark = settings.mode === 'dark'
-  const logo = isDark
-    ? `${bucketUrl}/safha-logo-transparent-white.png`
-    : `${bucketUrl}/safha-logo-transparent-black.png`
+  const logo = isDark ? `/logo-white.png` : `/logo-black.png`
   const { navCollapsed } = settings
   const menuCollapsedStyles = navCollapsed && !navHover ? { opacity: 0 } : { opacity: 1 }
 

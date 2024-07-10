@@ -17,17 +17,8 @@ import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import Icon from 'src/@core/components/icon'
 import { useSettings } from 'src/@core/hooks/useSettings'
-import {
-  getUniqueId,
-  handleCreateEvent,
-  modeToggle,
-  removeQueryParams,
-  reverseCrisp,
-  switchLocale
-} from 'src/@core/utils'
+import { getUniqueId, modeToggle, removeQueryParams, switchLocale } from 'src/@core/utils'
 import { authOptions } from 'src/pages/api/auth/[...nextauth]'
-import { bucketUrl } from 'src/types/constants'
-import { Events } from 'src/types/enums'
 import WebsiteWizards from 'src/views/pages/website-wizards/WebsiteWizards'
 import WebsiteWizardsHeader from 'src/views/pages/website-wizards/WebsiteWizardsHeader'
 
@@ -60,16 +51,13 @@ const SafhaGPT = (props: SafhaGPTProps) => {
   const searchParams = useSearchParams()
   const langQParam = searchParams.get('lang')
   const isDark = settings.mode === 'dark'
-  const logo = isDark
-    ? `${bucketUrl}/safha-logo-transparent-white.png`
-    : `${bucketUrl}/safha-logo-transparent-black.png`
+  const logo = isDark ? `/logo-white.png` : `/logo-black.png`
 
   const handleSwitchLocale = async () => {
     const currentLocale = i18n.language
     await switchLocale(settings, saveSettings, i18n)
     let email = getUniqueId()
     if (user && user.email) email = user.email
-    await handleCreateEvent(Events.SWITCHED_LOCALE, email, [`user_email: ${email}`, `current_locale: ${currentLocale}`])
   }
 
   const handleModeToggle = async () => {
@@ -78,7 +66,6 @@ const SafhaGPT = (props: SafhaGPTProps) => {
     let email = getUniqueId()
     const user = session?.user
     if (user && user.email) email = user.email
-    await handleCreateEvent(Events.SWITCHED_MODE, email, [`user_email: ${email}`, `current_mode: ${mode}`])
   }
 
   const options = [
@@ -89,7 +76,7 @@ const SafhaGPT = (props: SafhaGPTProps) => {
       popularPlan: false,
       currentPlan: false,
       subtitle: t('safha_gpt_chat_description'),
-      imgSrc: `${bucketUrl}/comfy.png`,
+      imgSrc: `/happy.png`,
       urlText: t('safha_gpt_chat_to_website'),
       url: '/chat'
     },
@@ -100,7 +87,7 @@ const SafhaGPT = (props: SafhaGPTProps) => {
       currentPlan: true,
       popularPlan: true,
       subtitle: t('safha_gpt_wizard_description'),
-      imgSrc: `${bucketUrl}/ecstatic.png`,
+      imgSrc: `/smile.png`,
       urlText: t('safha_gpt_wizard_to_website'),
       url: '/wizard'
     }
@@ -111,7 +98,6 @@ const SafhaGPT = (props: SafhaGPTProps) => {
     const direction = language === 'ar' ? 'rtl' : 'ltr'
     i18n.changeLanguage(language)
     moment.locale(language)
-    reverseCrisp(language === 'ar')
     saveSettings({ ...settings, direction: direction, language: language })
     removeQueryParams(router)
   }

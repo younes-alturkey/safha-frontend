@@ -159,7 +159,7 @@ const InfoRight = (props: InfoRightProps) => {
                     disablePadding
                     component={Link}
                     target='_blank'
-                    href={`https://help.safha.com/${isAr ? 'ar' : 'en'}`}
+                    href='https://github.com/younes-alturkey'
                     sx={{ textDecoration: 'none', color: 'inherit' }}
                   >
                     <ListItemButton sx={{ p: 2, borderRadius: 1 }}>

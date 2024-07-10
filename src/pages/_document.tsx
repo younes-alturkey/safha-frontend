@@ -1,6 +1,5 @@
 import createEmotionServer from '@emotion/server/create-instance'
 import Document, { Head, Html, Main, NextScript } from 'next/document'
-import Script from 'next/script'
 import { Children } from 'react'
 import { createEmotionCache } from 'src/@core/utils/create-emotion-cache'
 
@@ -42,7 +41,7 @@ class CustomDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <Script
+          {/* <Script
             id='crisp-script'
             strategy='afterInteractive'
             dangerouslySetInnerHTML={{
@@ -60,7 +59,7 @@ class CustomDocument extends Document {
             dangerouslySetInnerHTML={{
               __html: renderGoogleTagManagerSnippet(process.env.GOOGLE_ANALYTICS_MEASUREMENT_ID as string)
             }}
-          />
+          /> */}
         </body>
       </Html>
     )

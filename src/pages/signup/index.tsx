@@ -7,7 +7,6 @@ import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles'
-import * as Sentry from '@sentry/nextjs'
 import { Form, Formik } from 'formik'
 import { getServerSession } from 'next-auth'
 import { signIn, useSession } from 'next-auth/react'
@@ -24,11 +23,10 @@ import Icon from 'src/@core/components/icon'
 import CustomTextField from 'src/@core/components/mui/text-field'
 import { useSettings } from 'src/@core/hooks/useSettings'
 import BlankLayout from 'src/@core/layouts/BlankLayout'
-import { getUniqueId, handleCreateEvent, modeToggle, switchLocale } from 'src/@core/utils'
-import { RegisterType, register } from 'src/api/auth'
+import { getUniqueId, modeToggle, switchLocale } from 'src/@core/utils'
+import { RegisterType } from 'src/api/auth'
 import { authOptions } from 'src/pages/api/auth/[...nextauth]'
-import { bucketUrl } from 'src/types/constants'
-import { Events, HTTP } from 'src/types/enums'
+import { HTTP } from 'src/types/enums'
 import AuthIllustrationV1Wrapper from 'src/views/pages/auth/AuthIllustrationV1Wrapper'
 import * as yup from 'yup'
 
@@ -66,9 +64,7 @@ const SignUpPage = (props: Props) => {
   const websiteIdQParam = searchParams.get('websiteId')
   const [websiteId] = useState(websiteIdQParam)
   const isDark = settings.mode === 'dark'
-  const logo = isDark
-    ? `${bucketUrl}/safha-logo-transparent-white.png`
-    : `${bucketUrl}/safha-logo-transparent-black.png`
+  const logo = isDark ? `/logo-white.png` : `/logo-black.png`
 
   const FormSchema = yup.object().shape({
     firstname: yup.string().required(`${t('field_required')}`),
@@ -84,10 +80,10 @@ const SignUpPage = (props: Props) => {
   })
 
   const initialValues = {
-    firstname: '',
-    lastname: '',
-    email: '',
-    password: ''
+    firstname: 'Younes',
+    lastname: 'Alturkey',
+    email: 'younes@safha.com',
+    password: 'safha1325'
   }
 
   const handleSwitchLocale = async () => {
@@ -96,7 +92,6 @@ const SignUpPage = (props: Props) => {
     let email = getUniqueId()
     const user = session?.user
     if (user && user.email) email = user.email
-    await handleCreateEvent(Events.SWITCHED_LOCALE, email, [`user_email: ${email}`, `current_locale: ${currentLocale}`])
   }
 
   const handleModeToggle = async () => {
@@ -105,7 +100,6 @@ const SignUpPage = (props: Props) => {
     let email = getUniqueId()
     const user = session?.user
     if (user && user.email) email = user.email
-    await handleCreateEvent(Events.SWITCHED_MODE, email, [`user_email: ${email}`, `current_mode: ${mode}`])
   }
 
   const onSubmit = async (values: FormData) => {
@@ -118,41 +112,24 @@ const SignUpPage = (props: Props) => {
         email: values.email,
         password: values.password
       }
-      const registerRes = await register(apiUrl, payload)
-      if (registerRes.status === HTTP.CREATED) {
-        const signinReq = await signIn('credentials', {
-          email: values.email,
-          password: values.password,
-          redirect: false,
-          callbackUrl: '/dash'
-        })
 
-        const status = signinReq?.status
+      const signinReq = await signIn('credentials', {
+        email: values.email,
+        password: values.password,
+        redirect: false,
+        callbackUrl: '/dash'
+      })
 
-        switch (status) {
-          case HTTP.OK:
-            const user = registerRes?.data?.content
-            const userId = user?.id || 'noid'
-            const email = user?.email || 'noemail'
-            const name = user?.firstname && user?.lastname ? `${user?.firstname} ${user?.lastname}` : 'noname'
+      const status = signinReq?.status
 
-            await handleCreateEvent(Events.SIGNED_UP, email, [
-              'signup_type: direct',
-              'signup_method: email',
-              `user_id: ${userId}`,
-              `user_email: ${email}`,
-              `user_name: ${name}`
-            ])
-            await router.push('/dash')
-            toast.success(t('Welcome to Safha'))
-            break
-          default:
-            await router.push('/signin')
-            toast.error(t('account_created_but_failed_to_signin'))
-        }
-      } else {
-        toast.error(t('something_went_wrong'))
-        setSubmitting(false)
+      switch (status) {
+        case HTTP.OK:
+          await router.push('/dash')
+          toast.success(t('Welcome to Safha'))
+          break
+        default:
+          await router.push('/signin')
+          toast.error(t('account_created_but_failed_to_signin'))
       }
     } catch (error: any) {
       const err =
@@ -160,7 +137,6 @@ const SignUpPage = (props: Props) => {
           ? error.response.data.errors[0].message
           : error
       const errMsg = typeof err === 'string' ? err : 'something_went_wrong'
-      Sentry.captureException(err)
       console.error(err)
       toast.error(t(errMsg))
       setSubmitting(false)

@@ -27,7 +27,6 @@ import {
   compareVersionStrings,
   deepCompare,
   getUniqueId,
-  handleCreateEvent,
   isUrl,
   modeToggle,
   sleep,
@@ -35,8 +34,7 @@ import {
 } from 'src/@core/utils'
 import { AppDispatch } from 'src/store'
 import { setWizardState, wizardInitialState } from 'src/store/apps/wizard'
-import { APP_VERSION_BUILD, bucketUrl } from 'src/types/constants'
-import { Events } from 'src/types/enums'
+import { APP_VERSION_BUILD } from 'src/types/constants'
 import ResetWizardDialog from 'src/views/wizard/ResetWizardDialog'
 import StepDetails from 'src/views/wizard/StepDetails'
 import StepLive from 'src/views/wizard/StepLive'
@@ -103,9 +101,7 @@ const WizardPage = () => {
   const { t, i18n } = useTranslation()
   const { settings, saveSettings } = useSettings()
   const isDark = settings.mode === 'dark'
-  const logo = isDark
-    ? `${bucketUrl}/safha-logo-transparent-white.png`
-    : `${bucketUrl}/safha-logo-transparent-black.png`
+  const logo = isDark ? `/logo-white.png` : `/logo-black.png`
   const smallScreen = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'))
   const { direction } = settings
 
@@ -157,7 +153,6 @@ const WizardPage = () => {
     let email = getUniqueId()
     const user = session?.user
     if (user && user.email) email = user.email
-    await handleCreateEvent(Events.SWITCHED_LOCALE, email, [`user_email: ${email}`, `current_locale: ${currentLocale}`])
   }
 
   const handleModeToggle = async () => {
@@ -166,7 +161,6 @@ const WizardPage = () => {
     let email = getUniqueId()
     const user = session?.user
     if (user && user.email) email = user.email
-    await handleCreateEvent(Events.SWITCHED_MODE, email, [`user_email: ${email}`, `current_mode: ${mode}`])
   }
 
   const getStepContent = (step: number) => {
