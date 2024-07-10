@@ -6,7 +6,6 @@ import Typography from '@mui/material/Typography'
 import { Theme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import moment from 'moment'
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -16,7 +15,6 @@ import CustomAvatar from 'src/@core/components/mui/avatar'
 import WebsitePreviewCard from 'src/@core/components/website-preview-card'
 import { AppDispatch } from 'src/store'
 import { deleteWebsite } from 'src/store/apps/chat'
-import { bucketUrl } from 'src/types/constants'
 
 type WebsiteLiveMessageProps = {
   title: string
@@ -27,9 +25,8 @@ const WebsiteLiveMessage = (props: WebsiteLiveMessageProps) => {
   const router = useRouter()
   const dispatch = useDispatch<AppDispatch>()
   const { deleting } = useSelector((state: any) => state.chat)
-  const { data: session } = useSession()
   const { t } = useTranslation()
-  const logo = `${bucketUrl}/safha-logo-512x512.png`
+  const logo = '/logo.png'
   const breakpointMD = useMediaQuery((theme: Theme) => theme.breakpoints.between('sm', 'lg'))
   const [preview, setPreview] = useState<any>(null)
 

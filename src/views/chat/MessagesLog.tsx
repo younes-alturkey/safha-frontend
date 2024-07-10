@@ -9,7 +9,6 @@ import Icon from 'src/@core/components/icon'
 import MarkdownRenderer from 'src/@core/components/markdown-container'
 import CustomAvatar from 'src/@core/components/mui/avatar'
 import { sortArr } from 'src/@core/utils'
-import { bucketUrl } from 'src/types/constants'
 import WebsiteLiveMessage from 'src/views/chat/WebsiteLiveMessage'
 
 interface MsgProps {
@@ -30,7 +29,7 @@ interface MessagesLogProps {
 const MessagesLog = (props: MessagesLogProps) => {
   const { messages, live, thread } = useSelector((state: any) => state.chat)
   const chatArea = useRef(null)
-  const logo = `${bucketUrl}/safha-logo-512x512.png`
+  const logo = '/logo.png'
 
   const scrollToBottom = () => {
     if (chatArea.current) {

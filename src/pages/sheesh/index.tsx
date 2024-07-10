@@ -54,17 +54,17 @@ const Sheesh = () => {
     soon: {
       title: t('sorry_we_will_launch_soon'),
       linkTxt: t('view_product_roadmap'),
-      link: 'https://feedback.safha.com/roadmap'
+      link: 'https://github.com/younes-alturkey'
     },
     upgrade: {
       title: t('sorry_we_are_upgrading_the_system'),
       linkTxt: t('view_system_status'),
-      link: 'https://status.safha.com'
+      link: 'https://github.com/younes-alturkey'
     },
     maintenance: {
       title: t('sorry_we_are_doing_maintenance'),
       linkTxt: t('view_system_status'),
-      link: 'https://status.safha.com'
+      link: 'https://github.com/younes-alturkey'
     }
   }
 

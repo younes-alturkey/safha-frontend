@@ -1,9 +1,7 @@
 import LoadingButton from '@mui/lab/LoadingButton'
 import TabPanel from '@mui/lab/TabPanel'
-import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
 import { useSession } from 'next-auth/react'
 import toast from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
@@ -11,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getUniqueId, isString, isUrl } from 'src/@core/utils'
 import { AppDispatch } from 'src/store'
 import { logoDelete, logoUpload, setWizardState } from 'src/store/apps/wizard'
-import AIGeneratedLogos from 'src/views/wizard/AIGeneratedLogos'
 import WizardColorPicker from 'src/views/wizard/ColorPicker'
 import FontFamilyPicker from 'src/views/wizard/FontFamilyPicker'
 import LogoUploader from 'src/views/wizard/LogoUploader'
@@ -65,29 +62,6 @@ export default function BrandTab() {
           {(!wizard.details.brand.prompt && !wizard.details.brand.logo && !wizard.details.brand.aiLogo) ||
           (wizard.details.brand.logo && wizard.details.brand.type === 'upload') ? (
             <LogoUploader />
-          ) : null}
-
-          {!wizard.details.brand.logo && !wizard.details.brand.aiLogo && !wizard.details.brand.prompt && (
-            <Box height='100%' display='flex' justifyContent='center' alignItems='center'>
-              <Typography variant='body2' sx={{ opacity: 0.5 }}>
-                {t('or')}
-              </Typography>
-            </Box>
-          )}
-
-          {!wizard.details.brand.logo || (wizard.details.brand.logo && wizard.details.brand.type === 'generate') ? (
-            <AIGeneratedLogos
-              title={`${t('ai_logo')} (${t('optional')})`}
-              file={wizard.details.brand.logo}
-              setFile={file =>
-                dispatch(
-                  setWizardState({
-                    ...wizard,
-                    details: { ...wizard.details, brand: { ...wizard.details.brand, logo: file, type: 'generate' } }
-                  })
-                )
-              }
-            />
           ) : null}
         </Grid>
 

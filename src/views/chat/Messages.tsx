@@ -10,7 +10,6 @@ import { useSettings } from 'src/@core/hooks/useSettings'
 import { modeToggle, switchLocale } from 'src/@core/utils'
 import { AppDispatch } from 'src/store'
 import { setShowInfo } from 'src/store/apps/chat'
-import { bucketUrl } from 'src/types/constants'
 import InfoRight from 'src/views/chat/InfoRight'
 import MessagesLog from 'src/views/chat/MessagesLog'
 import SendMessageForm from 'src/views/chat/SendMessageForm'
@@ -27,7 +26,7 @@ const Messages = (props: MessagesProps) => {
   const dispatch = useDispatch<AppDispatch>()
   const { t, i18n } = useTranslation()
   const { settings, saveSettings } = useSettings()
-  const logo = `${bucketUrl}/safha-logo-512x512.png`
+  const logo = '/logo.png'
 
   const handleOpenInfo = () => dispatch(setShowInfo(true))
 

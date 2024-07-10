@@ -1,13 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { sleep } from 'src/@core/utils'
 import { deleteFile, uploadFile } from 'src/api/gcp'
-import { USERS_ASSETS_BUCKET_NAME } from 'src/types/constants'
+import { BUCKET_NAME } from 'src/types/constants'
 import { FileProp } from 'src/views/wizard/LogoUploader'
 
 export const generateWebsite = createAsyncThunk('wizard/generateWebsite', async (args: any, thunkAPI) => {
   try {
-    const { session } = args
-
     await sleep(7000)
     const generated = true
     const siteShot = '/safha-main.png'
@@ -87,7 +85,7 @@ export const logoUpload = createAsyncThunk('wizard/logoUpload', async (args: any
   try {
     const { id, file } = args
     const formData = new FormData()
-    formData.append('bucketName', USERS_ASSETS_BUCKET_NAME)
+    formData.append('bucketName', BUCKET_NAME)
     formData.append('folderName', `${id}/`)
     formData.append('file', file)
     const uploadRes = await uploadFile(formData)
@@ -104,7 +102,7 @@ export const photoUpload = createAsyncThunk('wizard/photoUpload', async (args: a
   const { id, file, index } = args
   try {
     const formData = new FormData()
-    formData.append('bucketName', USERS_ASSETS_BUCKET_NAME)
+    formData.append('bucketName', BUCKET_NAME)
     formData.append('folderName', `${id}/`)
     formData.append('file', file)
     const uploadRes = await uploadFile(formData)
@@ -121,7 +119,7 @@ export const projectImageUpload = createAsyncThunk('wizard/projectImageUpload', 
   const { id, file, index } = args
   try {
     const formData = new FormData()
-    formData.append('bucketName', USERS_ASSETS_BUCKET_NAME)
+    formData.append('bucketName', BUCKET_NAME)
     formData.append('folderName', `${id}/`)
     formData.append('file', file)
     const uploadRes = await uploadFile(formData)
@@ -138,7 +136,7 @@ export const galleryImageUpload = createAsyncThunk('wizard/galleryImageUpload', 
   const { id, file } = args
   try {
     const formData = new FormData()
-    formData.append('bucketName', USERS_ASSETS_BUCKET_NAME)
+    formData.append('bucketName', BUCKET_NAME)
     formData.append('folderName', `${id}/`)
     formData.append('file', file)
     const uploadRes = await uploadFile(formData)
@@ -155,7 +153,7 @@ export const productImageUpload = createAsyncThunk('wizard/productImageUpload', 
   const { id, file, index } = args
   try {
     const formData = new FormData()
-    formData.append('bucketName', USERS_ASSETS_BUCKET_NAME)
+    formData.append('bucketName', BUCKET_NAME)
     formData.append('folderName', `${id}/`)
     formData.append('file', file)
     const uploadRes = await uploadFile(formData)
@@ -340,7 +338,7 @@ export const wizardInitialState: WizardStateType = {
     },
     about: {
       name: 'Safha LLC',
-      email: 'info@safha.com  ',
+      email: 'me@younes.expert  ',
       phoneNumber: '+966538654514',
       location: 'Riyadh, Saudi Arabia',
       whatDoYouDo:

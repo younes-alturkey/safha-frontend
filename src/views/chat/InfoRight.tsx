@@ -18,7 +18,6 @@ import Icon from 'src/@core/components/icon'
 import Sidebar from 'src/@core/components/sidebar'
 import { AppDispatch } from 'src/store'
 import { setShowInfo } from 'src/store/apps/chat'
-import { bucketUrl } from 'src/types/constants'
 
 interface InfoRightProps {
   hidden: boolean
@@ -31,7 +30,7 @@ const InfoRight = (props: InfoRightProps) => {
   const dispatch = useDispatch<AppDispatch>()
   const { showInfo } = useSelector((state: any) => state.chat)
   const { t } = useTranslation()
-  const logo = `${bucketUrl}/safha-logo-512x512.png`
+  const logo = '/logo.png'
 
   const ScrollWrapper = ({ children }: { children: ReactNode }) => {
     if (props.hidden) {
@@ -129,7 +128,7 @@ const InfoRight = (props: InfoRightProps) => {
                     <ListItemText
                       sx={{ textTransform: 'lowercase' }}
                       primaryTypographyProps={{ variant: 'body1' }}
-                      primary='info@safha.com'
+                      primary='me@younes.expert'
                     />
                   </ListItem>
                 </List>
@@ -172,7 +171,7 @@ const InfoRight = (props: InfoRightProps) => {
                     disablePadding
                     component={Link}
                     target='_blank'
-                    href='https://feedback.safha.com/boards/issues'
+                    href='https://github.com/younes-alturkey'
                     sx={{ textDecoration: 'none', color: 'inherit' }}
                     className='nav-link'
                   >
@@ -187,7 +186,7 @@ const InfoRight = (props: InfoRightProps) => {
                     disablePadding
                     component={Link}
                     target='_blank'
-                    href='https://feedback.safha.com/boards/ideas'
+                    href='https://github.com/younes-alturkey'
                     sx={{ textDecoration: 'none', color: 'inherit' }}
                   >
                     <ListItemButton sx={{ p: 2, borderRadius: 1 }}>
@@ -201,7 +200,7 @@ const InfoRight = (props: InfoRightProps) => {
                     disablePadding
                     component={Link}
                     target='_blank'
-                    href='https://discord.gg/JEcScVtXfp'
+                    href='https://github.com/younes-alturkey'
                     sx={{ textDecoration: 'none', color: 'inherit' }}
                   >
                     <ListItemButton sx={{ p: 2, borderRadius: 1 }}>

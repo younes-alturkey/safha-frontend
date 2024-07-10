@@ -26,7 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method === 'POST') {
       const threadId = req.query.threadId
       const newRun = await openai.beta.threads.runs.create(threadId, {
-        assistant_id: process.env.OPENAI_SAFHAGPT_ASSISTANT_ID as string
+        assistant_id: (process.env.OPENAI_SAFHAGPT_ASSISTANT_ID as string) || 'asst_gBebYv90MGHGw4htSO3Hby2Y'
       })
 
       return res.status(HTTP.CREATED).json(newRun)
