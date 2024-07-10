@@ -15,7 +15,6 @@ import Icon from 'src/@core/components/icon'
 import { useSettings } from 'src/@core/hooks/useSettings'
 import BlankLayout from 'src/@core/layouts/BlankLayout'
 import { modeToggle, removeQueryParams, switchLocale } from 'src/@core/utils'
-import { bucketUrl } from 'src/types/constants'
 import FooterIllustrations from 'src/views/pages/misc/FooterIllustrations'
 
 // ** Styled Components
@@ -46,7 +45,7 @@ const Sheesh = () => {
   const { settings, saveSettings } = useSettings()
   const isDark = settings.mode === 'dark'
   const logo = isDark ? `/logo-white.png` : `/logo-black.png`
-  const illustration = `${bucketUrl}/something-went-wrong-illustration.png`
+  const illustration = `/ohh.png`
 
   const activeStatus = 'maintenance'
 

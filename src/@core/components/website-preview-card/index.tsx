@@ -11,6 +11,7 @@ interface WebsitePreviewCardProps {
   title: string
   url: string
   preview: any
+  code: string
 }
 
 const WebsitePreviewCard = (props: WebsitePreviewCardProps) => {
@@ -42,7 +43,9 @@ const WebsitePreviewCard = (props: WebsitePreviewCardProps) => {
           <a href={props.url} target='_blank' rel='noopener noreferrer'>
             <Button variant='contained'>{t('view_website')}</Button>
           </a>
-          <Button variant='tonal'>{t('download_code')}</Button>
+          <a href={props.code} target='_blank' rel='noopener noreferrer'>
+            <Button variant='tonal'>{t('download_code')}</Button>
+          </a>
         </Box>
       </CardContent>
     </Card>

@@ -11,7 +11,6 @@ import { useTranslation } from 'react-i18next'
 import Icon from 'src/@core/components/icon'
 import { shortenUuid } from 'src/@core/utils'
 import { ProfileHeaderType } from 'src/@fake-db/types'
-import { bucketUrl } from 'src/types/constants'
 
 interface UserProfileHeaderProps {
   user: any
@@ -19,7 +18,7 @@ interface UserProfileHeaderProps {
 
 const UserProfileHeader = (props: UserProfileHeaderProps) => {
   const [data, setData] = useState<ProfileHeaderType | null>(null)
-  const bannerImg = `${bucketUrl}/gbanner.png`
+  const bannerImg = '/grad.jpeg'
   const theme = useTheme()
   const { t } = useTranslation()
 

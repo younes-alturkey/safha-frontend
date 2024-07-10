@@ -11,7 +11,6 @@ import Icon from 'src/@core/components/icon'
 import { useSettings } from 'src/@core/hooks/useSettings'
 import BlankLayout from 'src/@core/layouts/BlankLayout'
 import { modeToggle, switchLocale } from 'src/@core/utils'
-import { bucketUrl } from 'src/types/constants'
 import FooterIllustrations from 'src/views/pages/misc/FooterIllustrations'
 
 const BoxWrapper = styled(Box)<BoxProps>(({ theme }) => ({
@@ -38,7 +37,7 @@ const NotFound = () => {
   const { settings, saveSettings } = useSettings()
   const isDark = settings.mode === 'dark'
   const logo = isDark ? `/logo-white.png` : `/logo-black.png`
-  const illustration = `${bucketUrl}/under-work-illustration.png`
+  const illustration = `/ohh.png`
 
   const handleSwitchLocale = async () => {
     await switchLocale(settings, saveSettings, i18n)

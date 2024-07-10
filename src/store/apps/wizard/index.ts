@@ -8,7 +8,7 @@ export const generateWebsite = createAsyncThunk('wizard/generateWebsite', async 
   try {
     await sleep(7000)
     const generated = true
-    const siteShot = '/safha-main.png'
+    const siteShot = '/siteshot.png'
 
     return { generated, siteShot }
   } catch (error) {
@@ -395,7 +395,7 @@ export const wizardInitialState: WizardStateType = {
         description:
           'A baboon tracking system utilizes technology such as GPS collars and tracking software to monitor and study the movements, behaviors, and habitats of baboons. This system aids in wildlife research and conservation efforts, providing valuable data on baboon populations and their interactions with the environment.',
         image: null,
-        imageType: 'generate',
+        imageType: null,
         prompt: '',
         aiImages: null,
         uploading: false,
@@ -418,7 +418,7 @@ export const wizardInitialState: WizardStateType = {
         title: 'ERP System for Child Care',
         description: `An ERP (Enterprise Resource Planning) system for child care centralizes and streamlines the management of a child care facility's operations. It integrates various functions such as enrollment, billing, scheduling, staff management, and communication with parents into a single platform, improving efficiency and enhancing the quality of child care services.`,
         image: null,
-        imageType: 'generate',
+        imageType: null,
         prompt: '',
         aiImages: null,
         uploading: false,
@@ -432,7 +432,7 @@ export const wizardInitialState: WizardStateType = {
         description:
           'Stylish and comfortable shoes designed for everyday wear, featuring a sleek, modern look with a durable sole and breathable material. Perfect for both casual outings and formal occasions.',
         image: null,
-        imageType: 'generate',
+        imageType: null,
         prompt: '',
         aiImages: null,
         uploading: false,
@@ -443,7 +443,7 @@ export const wizardInitialState: WizardStateType = {
         title: 'The Sunglasses',
         description: `"The Sunglasses" is a short film about an introverted teenager who discovers a pair of sunglasses that allow him to read people's thoughts. As he navigates his high school's social landscape, he must decide whether to use his new power for personal gain or for the greater good. The film explores themes of privacy, ethics, and the challenges of adolescence.`,
         image: null,
-        imageType: 'generate',
+        imageType: null,
         prompt: '',
         aiImages: null,
         uploading: false,
@@ -455,7 +455,7 @@ export const wizardInitialState: WizardStateType = {
         description:
           'Power Powder is a fictional substance often depicted in video games and comic books as a magical or highly scientific compound that can bestow temporary superhuman abilities, increased strength, or other enhanced attributes upon its users. It typically appears as a brightly colored, fine powder and is used by characters to gain an advantage in battles or missions.',
         image: null,
-        imageType: 'generate',
+        imageType: null,
         prompt: '',
         aiImages: null,
         uploading: false,

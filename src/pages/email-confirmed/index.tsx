@@ -10,7 +10,6 @@ import toast from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
 import FireworksContainer from 'src/@core/components/fireworks-container'
 import BlankLayout from 'src/@core/layouts/BlankLayout'
-import { bucketUrl } from 'src/types/constants'
 import FooterIllustrations from 'src/views/pages/misc/FooterIllustrations'
 
 // ** Styled Components
@@ -36,7 +35,7 @@ const Img = styled('img')(({ theme }) => ({
 const EmailConfirmed = () => {
   const { t } = useTranslation()
   const [playFireworks, setPlayFireworks] = useState(false)
-  const illustration = `${bucketUrl}/rocket-illustration.png`
+  const illustration = `/ohh.png`
 
   const stopFireworks = () => setPlayFireworks(false)
 

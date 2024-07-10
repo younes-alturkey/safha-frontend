@@ -9,7 +9,6 @@ import Icon from 'src/@core/components/icon'
 import WebsitePreviewCard from 'src/@core/components/website-preview-card'
 import { AppDispatch } from 'src/store'
 import { setWizardState } from 'src/store/apps/wizard'
-import { bucketUrl } from 'src/types/constants'
 import GeneratingWebsiteCard from 'src/views/wizard/GeneratingWebsiteCard'
 import PromptSummary from 'src/views/wizard/PromptSummary'
 
@@ -33,7 +32,7 @@ const StepLive = () => {
           }}
         >
           <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
-            <img width={140} height={140} src={`${bucketUrl}/ecstatic.png`} alt={'Excited smiley'} />
+            <img width={200} height={200} src='/excited.png' />
           </Box>
           <Typography variant='h4' sx={{ mb: 4 }}>
             {t('thank_you')}
@@ -73,7 +72,8 @@ const StepLive = () => {
           <GeneratingWebsiteCard title={t('your_website_is_being_generated')} />
         ) : wizard.generated ? (
           <WebsitePreviewCard
-            url='https://golden.safha.com'
+            url='https://safha-website.vercel.app'
+            code='https://github.com/younes-alturkey/safha-website'
             title={`${wizard.details.about.name}` || t('your_website')}
             preview={wizard.preview}
           />

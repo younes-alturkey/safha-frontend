@@ -19,6 +19,7 @@ import { deleteWebsite } from 'src/store/apps/chat'
 type WebsiteLiveMessageProps = {
   title: string
   url: string
+  code: string
 }
 
 const WebsiteLiveMessage = (props: WebsiteLiveMessageProps) => {
@@ -41,7 +42,7 @@ const WebsiteLiveMessage = (props: WebsiteLiveMessageProps) => {
   }
 
   const updateSiteShot = async () => {
-    const siteShot = '/safha-main.png'
+    const siteShot = '/siteshot.png'
     setPreview(siteShot)
   }
 
@@ -75,7 +76,7 @@ const WebsiteLiveMessage = (props: WebsiteLiveMessageProps) => {
         <Box sx={{ '&:not(:last-of-type)': { mb: 3 } }}>
           <Grid container spacing={6}>
             <Grid item xs={12} md={6}>
-              <WebsitePreviewCard title={props.title} url={props.url} preview={preview} />
+              <WebsitePreviewCard title={props.title} url={props.url} preview={preview} code={props.code} />
             </Grid>
           </Grid>
           <Grid container spacing={6} mt={1}>

@@ -113,19 +113,13 @@ const UserDropdown = (props: Props) => {
           </Box>
         </MenuItemStyled>
         <Divider sx={{ my: theme => `${theme.spacing(2)} !important` }} />
-        <MenuItemStyled
-          sx={{ p: 0 }}
-          onClick={() => handleDropdownClose(isAr ? 'https://safha.com/ar/answers' : 'https://safha.com/answers', true)}
-        >
+        <MenuItemStyled sx={{ p: 0 }} onClick={() => handleDropdownClose('https://github.com/younes-alturkey', true)}>
           <Box sx={styles}>
             <Icon icon='tabler:info-circle' />
             {t('faq')}
           </Box>
         </MenuItemStyled>
-        <MenuItemStyled
-          sx={{ p: 0 }}
-          onClick={() => handleDropdownClose(isAr ? 'https://safha.com/ar/pricing' : 'https://safha.com/pricing', true)}
-        >
+        <MenuItemStyled sx={{ p: 0 }} onClick={() => handleDropdownClose('https://github.com/younes-alturkey', true)}>
           <Box sx={styles}>
             <Icon icon='tabler:currency-dollar' />
             {t('pricing')}
