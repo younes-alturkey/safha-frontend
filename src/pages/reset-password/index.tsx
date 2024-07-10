@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles'
 import { Form, Formik, FormikHelpers } from 'formik'
 import { getServerSession } from 'next-auth'
-import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -20,7 +19,7 @@ import Icon from 'src/@core/components/icon'
 import CustomTextField from 'src/@core/components/mui/text-field'
 import { useSettings } from 'src/@core/hooks/useSettings'
 import BlankLayout from 'src/@core/layouts/BlankLayout'
-import { getUniqueId, modeToggle, switchLocale } from 'src/@core/utils'
+import { modeToggle, switchLocale } from 'src/@core/utils'
 import { authOptions } from 'src/pages/api/auth/[...nextauth]'
 import { HTTP } from 'src/types/enums'
 import AuthIllustrationV1Wrapper from 'src/views/pages/auth/AuthIllustrationV1Wrapper'
@@ -28,10 +27,6 @@ import * as yup from 'yup'
 
 interface FormData {
   email: string
-}
-
-interface Props {
-  apiUrl: string
 }
 
 // ** Styled Components
@@ -44,8 +39,7 @@ const LinkStyled = styled(Link)(({ theme }) => ({
   color: `${theme.palette.primary.main} !important`
 }))
 
-const RestPasswordPage = (props: Props) => {
-  const { data: session } = useSession()
+const RestPasswordPage = () => {
   const router = useRouter()
   const { t, i18n } = useTranslation()
   const { settings, saveSettings } = useSettings()
@@ -65,19 +59,11 @@ const RestPasswordPage = (props: Props) => {
   }
 
   const handleSwitchLocale = async () => {
-    const currentLocale = i18n.language
     await switchLocale(settings, saveSettings, i18n)
-    let email = getUniqueId()
-    const user = session?.user
-    if (user && user.email) email = user.email
   }
 
   const handleModeToggle = async () => {
-    const mode = settings.mode
     modeToggle(settings, saveSettings)
-    let email = getUniqueId()
-    const user = session?.user
-    if (user && user.email) email = user.email
   }
 
   const onSubmit = async (values: FormData, formik: FormikHelpers<FormData>) => {
@@ -191,7 +177,6 @@ const RestPasswordPage = (props: Props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-  const apiUrl = process.env.API_URL
   const session = await getServerSession(context.req, context.res, authOptions)
 
   if (session) {
@@ -199,7 +184,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   }
 
   return {
-    props: { apiUrl }
+    props: {}
   }
 }
 

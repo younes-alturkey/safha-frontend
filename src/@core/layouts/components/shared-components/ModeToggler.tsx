@@ -1,8 +1,7 @@
 import IconButton from '@mui/material/IconButton'
-import { useSession } from 'next-auth/react'
 import Icon from 'src/@core/components/icon'
 import { Settings } from 'src/@core/context/settingsContext'
-import { getUniqueId, modeToggle } from 'src/@core/utils'
+import { modeToggle } from 'src/@core/utils'
 
 interface Props {
   settings: Settings
@@ -10,15 +9,10 @@ interface Props {
 }
 
 const ModeToggler = (props: Props) => {
-  const { data: session } = useSession()
   const { settings, saveSettings } = props
 
   const handleModeToggle = async () => {
-    const mode = settings.mode
     modeToggle(settings, saveSettings)
-    let email = getUniqueId()
-    const user = session?.user
-    if (user && user.email) email = user.email
   }
 
   return (

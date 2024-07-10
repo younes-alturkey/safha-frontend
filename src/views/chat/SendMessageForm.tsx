@@ -5,7 +5,6 @@ import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import { styled, useTheme } from '@mui/material/styles'
 import { Form, Formik } from 'formik'
-import { useSession } from 'next-auth/react'
 import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
@@ -13,7 +12,6 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 import { useDispatch, useSelector } from 'react-redux'
 import Icon from 'src/@core/components/icon'
 import CustomTextField from 'src/@core/components/mui/text-field'
-import { getUniqueId } from 'src/@core/utils'
 import { AppDispatch } from 'src/store'
 import {
   createNewThread,
@@ -48,7 +46,6 @@ interface SendMessageFormProps {
 const SendMessageForm = (props: SendMessageFormProps) => {
   const dispatch = useDispatch<AppDispatch>()
   const { thread, prompt, loading, generating, locked, messages } = useSelector((state: any) => state.chat)
-  const { data: session } = useSession()
   const { t } = useTranslation()
   const theme = useTheme()
   const intervalRef = useRef<any>(null)
@@ -84,9 +81,6 @@ const SendMessageForm = (props: SendMessageFormProps) => {
       dispatch(setPrompt(''))
 
       let tead = thread
-      let email = getUniqueId()
-      const user = session?.user
-      if (user && user.email) email = user.email
 
       if (!tead) {
         const threadOp = await dispatch(createNewThread())

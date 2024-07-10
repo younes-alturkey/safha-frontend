@@ -9,7 +9,7 @@ import { styled } from '@mui/material/styles'
 import * as Sentry from '@sentry/nextjs'
 import { Form, Formik, FormikHelpers } from 'formik'
 import { getServerSession } from 'next-auth'
-import { signIn, useSession } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -45,7 +45,6 @@ const LinkStyled = styled(Link)(({ theme }) => ({
 }))
 
 const SignInPage = () => {
-  const { data: session } = useSession()
   const router = useRouter()
   const { t, i18n } = useTranslation()
   const { settings, saveSettings } = useSettings()
@@ -77,19 +76,11 @@ const SignInPage = () => {
   }
 
   const handleSwitchLocale = async () => {
-    const currentLocale = i18n.language
     await switchLocale(settings, saveSettings, i18n)
-    let email = getUniqueId()
-    const user = session?.user
-    if (user && user.email) email = user.email
   }
 
   const handleModeToggle = async () => {
-    const mode = settings.mode
     modeToggle(settings, saveSettings)
-    let email = getUniqueId()
-    const user = session?.user
-    if (user && user.email) email = user.email
   }
 
   const onSubmit = async (values: FormData, formik: FormikHelpers<FormData>) => {

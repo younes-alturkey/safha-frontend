@@ -3,12 +3,11 @@ import Badge from '@mui/material/Badge'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
-import { useSession } from 'next-auth/react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import Icon from 'src/@core/components/icon'
 import { useSettings } from 'src/@core/hooks/useSettings'
-import { getUniqueId, modeToggle, switchLocale } from 'src/@core/utils'
+import { modeToggle, switchLocale } from 'src/@core/utils'
 import { AppDispatch } from 'src/store'
 import { setShowInfo } from 'src/store/apps/chat'
 import { bucketUrl } from 'src/types/constants'
@@ -26,7 +25,6 @@ interface MessagesProps {
 
 const Messages = (props: MessagesProps) => {
   const dispatch = useDispatch<AppDispatch>()
-  const { data: session } = useSession()
   const { t, i18n } = useTranslation()
   const { settings, saveSettings } = useSettings()
   const logo = `${bucketUrl}/safha-logo-512x512.png`
@@ -34,19 +32,11 @@ const Messages = (props: MessagesProps) => {
   const handleOpenInfo = () => dispatch(setShowInfo(true))
 
   const handleSwitchLocale = async () => {
-    const currentLocale = i18n.language
     await switchLocale(settings, saveSettings, i18n)
-    let email = getUniqueId()
-    const user = session?.user
-    if (user && user.email) email = user.email
   }
 
   const handleModeToggle = async () => {
-    const mode = settings.mode
     modeToggle(settings, saveSettings)
-    let email = getUniqueId()
-    const user = session?.user
-    if (user && user.email) email = user.email
   }
 
   return (

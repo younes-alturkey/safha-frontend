@@ -1,16 +1,16 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { handleGetSiteShot, sleep } from 'src/@core/utils'
+import { sleep } from 'src/@core/utils'
 import { deleteFile, uploadFile } from 'src/api/gcp'
 import { USERS_ASSETS_BUCKET_NAME } from 'src/types/constants'
 import { FileProp } from 'src/views/wizard/LogoUploader'
 
 export const generateWebsite = createAsyncThunk('wizard/generateWebsite', async (args: any, thunkAPI) => {
   try {
-    const { wizard, session } = args
+    const { session } = args
 
     await sleep(7000)
     const generated = true
-    const siteShot = await handleGetSiteShot('https://golden.safha.com', session)
+    const siteShot = '/safha-main.png'
 
     return { generated, siteShot }
   } catch (error) {

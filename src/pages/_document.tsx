@@ -3,28 +3,28 @@ import Document, { Head, Html, Main, NextScript } from 'next/document'
 import { Children } from 'react'
 import { createEmotionCache } from 'src/@core/utils/create-emotion-cache'
 
-const renderCrispSnippet = () => {
-  return `window.$crisp=[];window.CRISP_WEBSITE_ID="9d9ec0fe-6972-4c67-8437-062fde4c5fc4";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();`
-}
-
-// const renderFeedBearSnippet = () => {
-//   return `(function (w, d, s, o, f, js, fjs) { w[o] = w[o] || function () { (w[o].q = w[o].q || []).push(arguments) }; js = d.createElement(s), fjs = d.getElementsByTagName(s)[0]; js.id = o; js.src = f; js.async = 1; fjs.parentNode.insertBefore(js, fjs); }(window, document, 'script', 'FeedBear', 'https://sdk.feedbear.com/widget.js'));
-//   FeedBear("button", {
-//   element: document.querySelector("[data-feedbear-button]"),
-//   project: "safha",
-//   board: "ideas",
-//   jwt: "fbear-jwt-qwD6EVKSuCER7zUvHdjNEAnX",
-//   });`
+// const renderCrispSnippet = () => {
+//   return `window.$crisp=[];window.CRISP_WEBSITE_ID="9d9ec0fe-6972-4c67-8437-062fde4c5fc4";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();`
 // }
 
-const renderGoogleTagManagerSnippet = (measurementId: string) => {
-  return ` window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', '${measurementId}', {
-      page_path: window.location.pathname,
-  });`
-}
+// // const renderFeedBearSnippet = () => {
+// //   return `(function (w, d, s, o, f, js, fjs) { w[o] = w[o] || function () { (w[o].q = w[o].q || []).push(arguments) }; js = d.createElement(s), fjs = d.getElementsByTagName(s)[0]; js.id = o; js.src = f; js.async = 1; fjs.parentNode.insertBefore(js, fjs); }(window, document, 'script', 'FeedBear', 'https://sdk.feedbear.com/widget.js'));
+// //   FeedBear("button", {
+// //   element: document.querySelector("[data-feedbear-button]"),
+// //   project: "safha",
+// //   board: "ideas",
+// //   jwt: "fbear-jwt-qwD6EVKSuCER7zUvHdjNEAnX",
+// //   });`
+// // }
+
+// const renderGoogleTagManagerSnippet = (measurementId: string) => {
+//   return ` window.dataLayer = window.dataLayer || [];
+//   function gtag(){dataLayer.push(arguments);}
+//   gtag('js', new Date());
+//   gtag('config', '${measurementId}', {
+//       page_path: window.location.pathname,
+//   });`
+// }
 
 class CustomDocument extends Document {
   render() {

@@ -8,14 +8,12 @@ import InputAdornment from '@mui/material/InputAdornment'
 import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles'
 import { Form, Formik } from 'formik'
-import { getServerSession } from 'next-auth'
-import { signIn, useSession } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
-import { GetServerSideProps, GetServerSidePropsContext } from 'next/types'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
@@ -23,9 +21,7 @@ import Icon from 'src/@core/components/icon'
 import CustomTextField from 'src/@core/components/mui/text-field'
 import { useSettings } from 'src/@core/hooks/useSettings'
 import BlankLayout from 'src/@core/layouts/BlankLayout'
-import { getUniqueId, modeToggle, switchLocale } from 'src/@core/utils'
-import { RegisterType } from 'src/api/auth'
-import { authOptions } from 'src/pages/api/auth/[...nextauth]'
+import { modeToggle, switchLocale } from 'src/@core/utils'
 import { HTTP } from 'src/types/enums'
 import AuthIllustrationV1Wrapper from 'src/views/pages/auth/AuthIllustrationV1Wrapper'
 import * as yup from 'yup'
@@ -35,10 +31,6 @@ interface FormData {
   lastname: string
   email: string
   password: string
-}
-
-interface Props {
-  apiUrl: string
 }
 
 // ** Styled Components
@@ -51,9 +43,7 @@ const LinkStyled = styled(Link)(({ theme }) => ({
   color: `${theme.palette.primary.main} !important`
 }))
 
-const SignUpPage = (props: Props) => {
-  const { data: session } = useSession()
-  const apiUrl = props.apiUrl
+const SignUpPage = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { t, i18n } = useTranslation()
@@ -87,32 +77,16 @@ const SignUpPage = (props: Props) => {
   }
 
   const handleSwitchLocale = async () => {
-    const currentLocale = i18n.language
     await switchLocale(settings, saveSettings, i18n)
-    let email = getUniqueId()
-    const user = session?.user
-    if (user && user.email) email = user.email
   }
 
   const handleModeToggle = async () => {
-    const mode = settings.mode
     modeToggle(settings, saveSettings)
-    let email = getUniqueId()
-    const user = session?.user
-    if (user && user.email) email = user.email
   }
 
   const onSubmit = async (values: FormData) => {
     setSubmitting(true)
     try {
-      const payload: RegisterType = {
-        roles: ['admin'],
-        firstname: values.firstname,
-        lastname: values.lastname,
-        email: values.email,
-        password: values.password
-      }
-
       const signinReq = await signIn('credentials', {
         email: values.email,
         password: values.password,
@@ -326,19 +300,6 @@ const SignUpPage = (props: Props) => {
       </Box>
     </BlankLayout>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-  const apiUrl = process.env.API_URL
-  const session = await getServerSession(context.req, context.res, authOptions)
-
-  if (session) {
-    return { redirect: { destination: '/dash', permanent: false } }
-  }
-
-  return {
-    props: { apiUrl }
-  }
 }
 
 export default SignUpPage

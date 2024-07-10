@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next'
 import Icon from 'src/@core/components/icon'
 import { useSettings } from 'src/@core/hooks/useSettings'
 import BlankLayout from 'src/@core/layouts/BlankLayout'
-import { getUniqueId, modeToggle, switchLocale } from 'src/@core/utils'
+import { modeToggle, switchLocale } from 'src/@core/utils'
 import { authOptions } from 'src/pages/api/auth/[...nextauth]'
 import FooterIllustrations from 'src/views/pages/misc/FooterIllustrations'
 
@@ -56,19 +56,11 @@ const SignOutPage = (props: Props) => {
   }
 
   const handleSwitchLocale = async () => {
-    const currentLocale = i18n.language
     await switchLocale(settings, saveSettings, i18n)
-    let email = getUniqueId()
-    const user = session?.user
-    if (user && user.email) email = user.email
   }
 
   const handleModeToggle = async () => {
-    const mode = settings.mode
     modeToggle(settings, saveSettings)
-    let email = getUniqueId()
-    const user = session?.user
-    if (user && user.email) email = user.email
   }
 
   useEffect(() => {

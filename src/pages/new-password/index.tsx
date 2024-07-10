@@ -8,7 +8,6 @@ import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles'
 import { Form, Formik, FormikHelpers } from 'formik'
 import { getServerSession } from 'next-auth'
-import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -22,8 +21,7 @@ import Icon from 'src/@core/components/icon'
 import CustomTextField from 'src/@core/components/mui/text-field'
 import { useSettings } from 'src/@core/hooks/useSettings'
 import BlankLayout from 'src/@core/layouts/BlankLayout'
-import { getUniqueId, modeToggle, switchLocale } from 'src/@core/utils'
-import { RestPasswordType } from 'src/api/auth'
+import { modeToggle, switchLocale } from 'src/@core/utils'
 import { authOptions } from 'src/pages/api/auth/[...nextauth]'
 import AuthIllustrationV1Wrapper from 'src/views/pages/auth/AuthIllustrationV1Wrapper'
 import * as yup from 'yup'
@@ -31,10 +29,6 @@ import * as yup from 'yup'
 interface FormData {
   password: string
   confirmPassword: string
-}
-
-interface Props {
-  apiUrl: string
 }
 
 const LinkStyled = styled(Link)(({ theme }) => ({
@@ -47,8 +41,7 @@ const Card = styled(MuiCard)<CardProps>(({ theme }) => ({
   [theme.breakpoints.up('sm')]: { width: '25rem' }
 }))
 
-const NewPasswordPage = (props: Props) => {
-  const { data: session } = useSession()
+const NewPasswordPage = () => {
   const router = useRouter()
   const { t, i18n } = useTranslation()
   const searchParams = useSearchParams()
@@ -59,7 +52,6 @@ const NewPasswordPage = (props: Props) => {
   const emailQParam = searchParams.get('userEmail')
   const tokenQParam = searchParams.get('token')
   const [email] = useState(emailQParam)
-  const [token] = useState(tokenQParam)
   const isDark = settings.mode === 'dark'
   const logo = isDark ? `/logo-white.png` : `/logo-black.png`
 
@@ -80,29 +72,16 @@ const NewPasswordPage = (props: Props) => {
   }
 
   const handleSwitchLocale = async () => {
-    const currentLocale = i18n.language
     await switchLocale(settings, saveSettings, i18n)
-    let email = getUniqueId()
-    const user = session?.user
-    if (user && user.email) email = user.email
   }
 
   const handleModeToggle = async () => {
-    const mode = settings.mode
     modeToggle(settings, saveSettings)
-    let email = getUniqueId()
-    const user = session?.user
-    if (user && user.email) email = user.email
   }
 
   const onSubmit = async (values: FormData, formik: FormikHelpers<FormData>) => {
     setSubmitting(true)
     try {
-      const data: RestPasswordType = {
-        password: values.confirmPassword,
-        email: email as string,
-        token: token as string
-      }
       toast.success(t('password_reset_successful'))
       await router.push({
         pathname: '/signin',
@@ -275,7 +254,6 @@ const NewPasswordPage = (props: Props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-  const apiUrl = process.env.API_URL
   const session = await getServerSession(context.req, context.res, authOptions)
 
   if (session) {
@@ -283,7 +261,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   }
 
   return {
-    props: { apiUrl }
+    props: {}
   }
 }
 

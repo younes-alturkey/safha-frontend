@@ -17,7 +17,7 @@ import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import Icon from 'src/@core/components/icon'
 import { useSettings } from 'src/@core/hooks/useSettings'
-import { getUniqueId, modeToggle, removeQueryParams, switchLocale } from 'src/@core/utils'
+import { modeToggle, removeQueryParams, switchLocale } from 'src/@core/utils'
 import { authOptions } from 'src/pages/api/auth/[...nextauth]'
 import WebsiteWizards from 'src/views/pages/website-wizards/WebsiteWizards'
 import WebsiteWizardsHeader from 'src/views/pages/website-wizards/WebsiteWizardsHeader'
@@ -44,8 +44,6 @@ interface SafhaGPTProps {
 
 const SafhaGPT = (props: SafhaGPTProps) => {
   const router = useRouter()
-  const session = props.session ? JSON.parse(props.session) : null
-  const user = session?.user
   const { i18n } = useTranslation()
   const { settings, saveSettings } = useSettings()
   const searchParams = useSearchParams()
@@ -54,18 +52,11 @@ const SafhaGPT = (props: SafhaGPTProps) => {
   const logo = isDark ? `/logo-white.png` : `/logo-black.png`
 
   const handleSwitchLocale = async () => {
-    const currentLocale = i18n.language
     await switchLocale(settings, saveSettings, i18n)
-    let email = getUniqueId()
-    if (user && user.email) email = user.email
   }
 
   const handleModeToggle = async () => {
-    const mode = settings.mode
     modeToggle(settings, saveSettings)
-    let email = getUniqueId()
-    const user = session?.user
-    if (user && user.email) email = user.email
   }
 
   const options = [
@@ -161,12 +152,10 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   let session = null
   const sessionData = await getServerSession(context.req, context.res, authOptions)
   if (sessionData) session = JSON.stringify(sessionData)
-  const apiUrl = process.env.API_URL
 
   return {
     props: {
-      session,
-      apiUrl
+      session
     }
   }
 }

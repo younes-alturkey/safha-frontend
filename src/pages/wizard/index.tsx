@@ -8,7 +8,6 @@ import MuiStepper, { StepperProps } from '@mui/material/Stepper'
 import Typography from '@mui/material/Typography'
 import { Theme, styled } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -26,7 +25,6 @@ import {
   canCreateObjectURL,
   compareVersionStrings,
   deepCompare,
-  getUniqueId,
   isUrl,
   modeToggle,
   sleep,
@@ -97,7 +95,6 @@ const Stepper = styled(MuiStepper)<StepperProps>(({ theme }) => ({
 const WizardPage = () => {
   const dispatch = useDispatch<AppDispatch>()
   const wizard = useSelector((state: any) => state.wizard)
-  const { data: session } = useSession()
   const { t, i18n } = useTranslation()
   const { settings, saveSettings } = useSettings()
   const isDark = settings.mode === 'dark'
@@ -148,19 +145,11 @@ const WizardPage = () => {
   ]
 
   const handleSwitchLocale = async () => {
-    const currentLocale = i18n.language
     await switchLocale(settings, saveSettings, i18n)
-    let email = getUniqueId()
-    const user = session?.user
-    if (user && user.email) email = user.email
   }
 
   const handleModeToggle = async () => {
-    const mode = settings.mode
     modeToggle(settings, saveSettings)
-    let email = getUniqueId()
-    const user = session?.user
-    if (user && user.email) email = user.email
   }
 
   const getStepContent = (step: number) => {

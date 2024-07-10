@@ -30,8 +30,7 @@ interface InfoRightProps {
 const InfoRight = (props: InfoRightProps) => {
   const dispatch = useDispatch<AppDispatch>()
   const { showInfo } = useSelector((state: any) => state.chat)
-  const { t, i18n } = useTranslation()
-  const isAr = i18n.language === 'ar'
+  const { t } = useTranslation()
   const logo = `${bucketUrl}/safha-logo-512x512.png`
 
   const ScrollWrapper = ({ children }: { children: ReactNode }) => {

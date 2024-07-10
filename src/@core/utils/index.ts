@@ -285,40 +285,17 @@ export async function removeQueryParams(router: NextRouter) {
   )
 }
 
-export async function handleUpdateSiteShot(
-  url: string,
-  siteShotCacheName: string,
-  siteShotCacheExpName: string,
-  session: any
-) {
+export async function handleUpdateSiteShot(url: string, siteShotCacheName: string, siteShotCacheExpName: string) {
   const siteShotRes = await getSiteShot(url)
   if (siteShotRes.status === HTTP.OK) {
     const siteShot = siteShotRes.data.image
     localStorage.setItem(siteShotCacheName, JSON.stringify(siteShot))
     localStorage.setItem(siteShotCacheExpName, JSON.stringify(fromNowUnix(4 * 60 * 60)))
-    let email = getUniqueId()
-    const user = session?.user
-    if (user && user.email) email = user.email
 
     return siteShot
   }
 
   return null
-}
-
-export async function handleGetSiteShot(url: string, session: any) {
-  const santizedUrl = removeHttp(url)
-  const siteShotCacheName = `site_shot_cache_${santizedUrl}`
-  const siteShotCacheExpName = `site_shot_cache_exp_${santizedUrl}`
-  const siteShotFromStorage = localStorage.getItem(siteShotCacheName)
-  const siteShotExpFromStorage = localStorage.getItem(siteShotCacheExpName)
-  if (siteShotExpFromStorage && siteShotFromStorage) {
-    const cachedSiteShotExp = JSON.parse(siteShotExpFromStorage)
-    const now = Math.floor(Date.now() / 1000)
-    if (cachedSiteShotExp && now > cachedSiteShotExp)
-      return await handleUpdateSiteShot(url, siteShotCacheName, siteShotCacheExpName, session)
-    else return JSON.parse(siteShotFromStorage)
-  } else return await handleUpdateSiteShot(url, siteShotCacheName, siteShotCacheExpName, session)
 }
 
 export function sortArr(arr: any) {

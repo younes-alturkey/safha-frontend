@@ -1,6 +1,5 @@
 import { faker } from '@faker-js/faker'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import * as Sentry from '@sentry/nextjs'
 import { extractConfirmationMessage, extractWebsiteInfo, sleep } from 'src/@core/utils'
 import { createMessage, createRun, createThread, getMessages, retrieveRun } from 'src/api/openai'
 import { createWebsite } from 'src/api/website'

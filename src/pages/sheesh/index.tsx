@@ -4,7 +4,6 @@ import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles'
 import moment from 'moment'
-import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -15,7 +14,7 @@ import { useTranslation } from 'react-i18next'
 import Icon from 'src/@core/components/icon'
 import { useSettings } from 'src/@core/hooks/useSettings'
 import BlankLayout from 'src/@core/layouts/BlankLayout'
-import { getUniqueId, modeToggle, removeQueryParams, switchLocale } from 'src/@core/utils'
+import { modeToggle, removeQueryParams, switchLocale } from 'src/@core/utils'
 import { bucketUrl } from 'src/types/constants'
 import FooterIllustrations from 'src/views/pages/misc/FooterIllustrations'
 
@@ -43,7 +42,6 @@ const Sheesh = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const langQParam = searchParams.get('lang')
-  const { data: session } = useSession()
   const { t, i18n } = useTranslation()
   const { settings, saveSettings } = useSettings()
   const isDark = settings.mode === 'dark'
@@ -71,19 +69,11 @@ const Sheesh = () => {
   }
 
   const handleSwitchLocale = async () => {
-    const currentLocale = i18n.language
     await switchLocale(settings, saveSettings, i18n)
-    let email = getUniqueId()
-    const user = session?.user
-    if (user && user.email) email = user.email
   }
 
   const handleModeToggle = async () => {
-    const mode = settings.mode
     modeToggle(settings, saveSettings)
-    let email = getUniqueId()
-    const user = session?.user
-    if (user && user.email) email = user.email
   }
 
   const handleSetLocale = async (lang: string) => {

@@ -14,7 +14,6 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import CustomAvatar from 'src/@core/components/mui/avatar'
 import WebsitePreviewCard from 'src/@core/components/website-preview-card'
-import { handleGetSiteShot } from 'src/@core/utils'
 import { AppDispatch } from 'src/store'
 import { deleteWebsite } from 'src/store/apps/chat'
 import { bucketUrl } from 'src/types/constants'
@@ -32,7 +31,7 @@ const WebsiteLiveMessage = (props: WebsiteLiveMessageProps) => {
   const { t } = useTranslation()
   const logo = `${bucketUrl}/safha-logo-512x512.png`
   const breakpointMD = useMediaQuery((theme: Theme) => theme.breakpoints.between('sm', 'lg'))
-  const [preview, setPreview] = useState(null)
+  const [preview, setPreview] = useState<any>(null)
 
   const handleManageWebsite = () => {
     router.push({ pathname: '/signup', query: { websiteId: '#1536548131' } })
@@ -45,7 +44,7 @@ const WebsiteLiveMessage = (props: WebsiteLiveMessageProps) => {
   }
 
   const updateSiteShot = async () => {
-    const siteShot = await handleGetSiteShot(props.url, session)
+    const siteShot = '/safha-main.png'
     setPreview(siteShot)
   }
 

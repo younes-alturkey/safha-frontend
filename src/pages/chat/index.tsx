@@ -59,10 +59,8 @@ const ChatPage = (props: ChatPageProps) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const apiUrl = process.env.API_URL
-
   return {
-    props: { apiUrl }
+    props: {}
   }
 }
 
