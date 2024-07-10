@@ -407,7 +407,7 @@ export const wizardInitialState: WizardStateType = {
         description:
           'FlyMizar is an airline booking website that offers users the ability to search for, compare, and book flights. It provides a user-friendly interface with options for filtering flights by price, duration, and airline, along with additional travel services such as hotel bookings and car rentals.',
         image: null,
-        imageType: 'generate',
+        imageType: null,
         prompt: '',
         aiImages: null,
         uploading: false,
