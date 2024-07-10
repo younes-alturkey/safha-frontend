@@ -24,10 +24,10 @@ export const logosGenerate = createAsyncThunk('wizard/logosGenerate', async (arg
 
     return {
       logos: [
-        'https://storage.googleapis.com/gen-ass/logos/cristina.gutkowski-1.png',
-        'https://storage.googleapis.com/gen-ass/logos/cristina.gutkowski-2.png',
-        'https://storage.googleapis.com/gen-ass/logos/cristina.gutkowski-3.png',
-        'https://storage.googleapis.com/gen-ass/logos/cristina.gutkowski-4.png'
+        'https://safha-frontend.vercel.app/logo.png',
+        'https://safha-frontend.vercel.app/logo.png',
+        'https://safha-frontend.vercel.app/logo.png',
+        'https://safha-frontend.vercel.app/logo.png'
       ]
     }
   } catch (error) {
@@ -46,10 +46,10 @@ export const projectImagesGenerate = createAsyncThunk('wizard/projectImagesGener
     return {
       index,
       images: [
-        'https://storage.googleapis.com/gen-ass/images/consuelo-1.jpg',
-        'https://storage.googleapis.com/gen-ass/images/consuelo-2.jpg',
-        'https://storage.googleapis.com/gen-ass/images/consuelo-3.jpg',
-        'https://storage.googleapis.com/gen-ass/images/consuelo-4.jpg'
+        'https://safha-frontend.vercel.app/safha-main.png',
+        'https://safha-frontend.vercel.app/safha-main.png',
+        'https://safha-frontend.vercel.app/safha-main.png',
+        'https://safha-frontend.vercel.app/safha-main.png'
       ]
     }
   } catch (error) {
@@ -68,10 +68,10 @@ export const productImagesGenerate = createAsyncThunk('wizard/productImagesGener
     return {
       index,
       images: [
-        'https://storage.googleapis.com/gen-ass/images/consuelo-1.jpg',
-        'https://storage.googleapis.com/gen-ass/images/consuelo-2.jpg',
-        'https://storage.googleapis.com/gen-ass/images/consuelo-3.jpg',
-        'https://storage.googleapis.com/gen-ass/images/consuelo-4.jpg'
+        'https://safha-frontend.vercel.app/safha-main.png',
+        'https://safha-frontend.vercel.app/safha-main.png',
+        'https://safha-frontend.vercel.app/safha-main.png',
+        'https://safha-frontend.vercel.app/safha-main.png'
       ]
     }
   } catch (error) {
@@ -351,7 +351,7 @@ export const wizardInitialState: WizardStateType = {
         name: 'Younes Alturkey',
         title: 'CEO',
         bio: 'A visionary software engineer and serial entrepreneur dedicated to revolutionizing economies and creating groundbreaking unicorn enterprises.',
-        photo: 'https://storage.googleapis.com/safha-public-01/younes_short.jpg',
+        photo: 'https://safha-frontend.vercel.app/younes.jpg',
         uploading: false,
         deleting: false
       },
@@ -359,7 +359,7 @@ export const wizardInitialState: WizardStateType = {
         name: 'Abdullah Alhazmi',
         title: 'President',
         bio: 'Engineering architect and entrepreneur crafting disruptive tech and dynamic culture, blending innovation with teamwork for industry change.',
-        photo: 'https://storage.googleapis.com/safha-public-01/abdullah.jpg',
+        photo: 'https://safha-frontend.vercel.app/abdullah.jpeg',
         uploading: false,
         deleting: false
       },
@@ -367,7 +367,7 @@ export const wizardInitialState: WizardStateType = {
         name: 'Faris Alahmadi',
         title: 'Chief Scientist',
         bio: 'AI researcher and engineer driven to lead the AI revolution in MENA, aiming to create groundbreaking, transformative AI technologies.',
-        photo: 'https://storage.googleapis.com/safha-public-01/faris.jpeg',
+        photo: 'https://safha-frontend.vercel.app/faris.jpeg',
         uploading: false,
         deleting: false
       }
@@ -479,10 +479,10 @@ export const wizardInitialState: WizardStateType = {
     ],
     gallery: {
       images: [
-        'https://storage.googleapis.com/safha-public-01/image1.avif',
-        'https://storage.googleapis.com/safha-public-01/image2.avif',
-        'https://storage.googleapis.com/safha-public-01/image3.avif',
-        'https://storage.googleapis.com/safha-public-01/image4.avif'
+        'https://safha-frontend.vercel.app/safha-main.png',
+        'https://safha-frontend.vercel.app/safha-main.png',
+        'https://safha-frontend.vercel.app/safha-main.png',
+        'https://safha-frontend.vercel.app/safha-main.png'
       ],
       image: null,
       uploading: false
