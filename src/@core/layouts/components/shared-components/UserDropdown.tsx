@@ -34,8 +34,6 @@ const MenuItemStyled = styled(MenuItem)<MenuItemProps>(({ theme }) => ({
 
 const UserDropdown = (props: Props) => {
   const { settings, user } = props
-  const language = settings.language
-  const isAr = language === 'ar'
   const [anchorEl, setAnchorEl] = useState<Element | null>(null)
   const router = useRouter()
   const { direction } = settings

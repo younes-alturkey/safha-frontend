@@ -32,7 +32,7 @@ const StepLive = () => {
           }}
         >
           <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
-            <img width={200} height={200} src='/excited.png' />
+            <img width={200} height={200} src='/excited.png' alt='excited emoji' />
           </Box>
           <Typography variant='h4' sx={{ mb: 4 }}>
             {t('thank_you')}

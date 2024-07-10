@@ -189,7 +189,9 @@ const MessagesLog = (props: MessagesLogProps) => {
 
           return isModel ? <AssistantMessage key={msg.id} msg={msg} /> : <UserMessage key={msg.id} msg={msg} />
         })}
-        {thread && live && live.threadId === thread.id && <WebsiteLiveMessage title={live.title} url={live.url} />}
+        {thread && live && live.threadId === thread.id && (
+          <WebsiteLiveMessage title={live.title} url={live.url} code={live.url} />
+        )}
       </ScrollWrapper>
     </Box>
   )
